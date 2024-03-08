@@ -222,10 +222,10 @@
       context.font = '100px serif';
       if (d.size > max / 50) {
         context.fillStyle = "white";
-        d.id
+        d.name
           .split(/(?=[A-Z])/)
           .forEach((word, index) =>
-            context.fillText(d.id, d.x - (d.id.length/2) * 50, d.y)
+            context.fillText(d.name, d.x - (d.name.length/2) * 50, d.y)
           );
         
       }
@@ -294,7 +294,7 @@
 <div on:resize={resize} class="container">
   {#if activeNode}
     <breadcrumb id="nodeDetails">
-      <strong>{activeNode.id}</strong>
+      <strong>{activeNode.name}</strong>
       <br />
       {#if activeNode.details}
         {#each Object.entries(activeNode.details) as detail}
