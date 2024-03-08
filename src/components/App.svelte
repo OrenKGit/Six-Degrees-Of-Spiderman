@@ -2,8 +2,8 @@
 
   import BarChart from "./BarChart.svelte";
   //import netdata from './nodes-links.json'
-  import netdata from './10nodes.json'
-  //import netdata from './marvelnodes.json'
+  //import netdata from './10nodes.json'
+  import netdata from './marvelnodes.json'
   import data from './count-hero-network.json'
   import NetworkGraph from "./NetworkGraph.svelte";
 
