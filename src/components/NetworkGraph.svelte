@@ -1,51 +1,22 @@
 <script>
+  
   import { onMount } from "svelte";
-  import { scaleLinear, scaleOrdinal } from "d3-scale";
-  import { zoom, zoomIdentity } from "d3-zoom";
-  import { schemeCategory10 } from "d3-scale-chromatic";
-  import { select, selectAll, pointer } from "d3-selection";
-  import { drag } from "d3-drag";
-  import {
-    forceSimulation,
-    forceLink,
-    forceManyBody,
-    forceCenter,
-    forceCollide,
-  } from "d3-force";
-
-  //import { event as currentEvent } from "d3-selection"; // Needed to get drag working, see: https://github.com/d3/d3/issues/2733
-  let d3 = {  
-    zoom,
-    zoomIdentity,
-    scaleLinear,
-    scaleOrdinal,
-    schemeCategory10,
-    select,
-    selectAll,
-    pointer,
-    drag,
-    forceSimulation,
-    forceLink,
-    forceManyBody,
-    forceCenter,
-    forceCollide,
-  };
-
+  import * as d3 from 'd3';
   export let graph;
 
   let canvas;
   let width = 500;
   let height = 600;
-  let max = 100;
+  let max = 1000;
   const nodeRadius = 5;
   let activeNode = false;
   const padding = { top: 20, right: 40, bottom: 40, left: 25 };
 
-  $: xScale = scaleLinear()
+  $: xScale = d3.scaleLinear()
     .domain([0, 20])
     .range([padding.left, width - padding.right]);
 
-  $: yScale = scaleLinear()
+  $: yScale = d3.scaleLinear()
     .domain([0, 12])
     .range([height - padding.bottom, padding.top]);
 
@@ -53,7 +24,7 @@
 
   $: yTicks = height > 180 ? [0, 2, 4, 6, 8, 10, 12] : [0, 4, 8, 12];
 
-  $: d3yScale = scaleLinear().domain([0, height]).range([height, 0]);
+  $: d3yScale = d3.scaleLinear().domain([0, height]).range([height, 0]);
 
   $: links = graph.links.map((d) => Object.create(d));
   $: nodes = graph.nodes.map((d) => {
@@ -61,7 +32,7 @@
       .filter((link) => link.source == d.id || link.target == d.id)
       .map((link) => link.value)
       .reduce((a, b) => a + b), 2);
-    if (d.id == "You") {
+    if (d.id == "you") {
       max = d.size;
       d.details.messages = max;
     }
@@ -70,13 +41,14 @@
 
   function groupColour(context, d) {
     let nodesize = 2 + Math.sqrt(d.size) / 5;
+    
     let radgrad = context.createRadialGradient(
       d.x,
       d.y,
       nodesize / 3,
       d.x,
       d.y,
-      nodesize
+      nodesize / 2
     );
     radgrad.addColorStop(0, "#01abfc");
     radgrad.addColorStop(0.1, "#01abfc");
@@ -88,7 +60,7 @@
       nodesize / 3,
       d.x,
       d.y,
-      nodesize
+      nodesize / 2
     );
     radgrad2.addColorStop(0, "#7A17F6");
     radgrad2.addColorStop(0.1, "#7A17F6");
@@ -100,7 +72,7 @@
       nodesize / 3,
       d.x,
       d.y,
-      nodesize
+      nodesize / 2
     );
     radgrad3.addColorStop(0, "#B635E3");
     radgrad3.addColorStop(0.1, "#B635E3");
@@ -112,7 +84,7 @@
       nodesize / 3,
       d.x,
       d.y,
-      nodesize
+      nodesize / 2
     );
     radgrad4.addColorStop(0, "#E4158B");
     radgrad4.addColorStop(0.1, "#E4158B");
@@ -124,13 +96,39 @@
       nodesize / 3,
       d.x,
       d.y,
-      nodesize
+      nodesize / 2
     );
-    radgrad4.addColorStop(0, "#F9123B");
-    radgrad4.addColorStop(0.1, "#F9123B");
-    radgrad4.addColorStop(1, "#F9123B00");
+    radgrad5.addColorStop(0, "#F9123B");
+    radgrad5.addColorStop(0.1, "#F9123B");
+    radgrad5.addColorStop(1, "#F9123B00");
+    /*
+    let radgrad6 = context.createRadialGradient(
+      d.x,
+      d.y,
+      nodesize / 3,
+      d.x,
+      d.y,
+      nodesize / 2
+    );
+    radgrad6.addColorStop(0, "#F2999B");
+    radgrad6.addColorStop(0.1, "#F2999B");
+    radgrad6.addColorStop(1, "#F2999B00");
+
+    let radgrad7 = context.createRadialGradient(
+      d.x,
+      d.y,
+      nodesize / 3,
+      d.x,
+      d.y,
+      nodesize / 2
+    );
+    radgrad7.addColorStop(0, "#E1911B");
+    radgrad7.addColorStop(0.1, "#E1911B");
+    radgrad7.addColorStop(1, "#E1911BB00");
+    , radgrad6, radgrad7
+    */
     let radgrads = [radgrad, radgrad2, radgrad3, radgrad4, radgrad5];
-    return radgrads[d.group % 5];
+    return radgrads[d.group];
   }
   let showCard;
   let transform = d3.zoomIdentity;
@@ -149,12 +147,13 @@
           .forceLink(links)
           .id((d) => d.id)
           .distance(
-            (d) => 2 + Math.sqrt(max) / 4 + 130 * Math.pow(2, -d.value / 1000)
+            (d) => Math.pow(2, -d.value / 1) / 10
+            //(d) => 2 + Math.sqrt(max) / 4 + 130 * Math.pow(2, -d.value / 1)
           )
       )
       .force("charge", d3.forceManyBody())
       .force("center", d3.forceCenter(width / 2, height / 2))
-      //.force('collision', d3.forceCollide().radius((d) => Math.sqrt(d.size)/4))
+      .force('collision', d3.forceCollide().radius((d) => Math.sqrt(d.size)/3))
       .on("tick", simulationUpdate);
 
     // title
@@ -190,7 +189,7 @@
       .call(
         d3
           .zoom()
-          .scaleExtent([1 / 10, 8])
+          .scaleExtent([1 / 100, 8])
           .on("zoom", zoomed)
       );
   });
@@ -207,7 +206,7 @@
       context.lineTo(d.target.x, d.target.y);
       context.globalAlpha = 0.3;
       context.strokeStyle = "#999";
-      context.lineWidth = Math.cbrt(d.value) / 2;
+      context.lineWidth = Math.cbrt(d.value) / 1;
       context.stroke();
       context.globalAlpha = 1;
     });
@@ -220,13 +219,15 @@
       context.stroke();
       context.fillStyle = groupColour(context, d);
       context.fill();
+      context.font = '100px serif';
       if (d.size > max / 50) {
         context.fillStyle = "white";
         d.id
           .split(/(?=[A-Z])/)
           .forEach((word, index) =>
-            context.fillText(word, d.x - 10, d.y + 10 * index)
+            context.fillText(d.id, d.x - (d.id.length/2) * 50, d.y)
           );
+        
       }
     });
     context.restore();
@@ -238,6 +239,7 @@
   }
 
   // Use the d3-force simulation to locate the node
+  
   function dragsubject(currentEvent) {
     const node = simulation.find(
       transform.invertX(currentEvent.x * dpi),
@@ -267,7 +269,7 @@
     currentEvent.subject.fx = null;
     currentEvent.subject.fy = null;
   }
-
+  
   function resize() {
     ({ width, height } = canvas);
   }
@@ -282,15 +284,17 @@
     width = node.offsetWidth * dpi;
     height = node.offsetHeight * dpi;
   }
+
 </script>
 
-<h2 style="color:white">Graph of how much you've messaged each friend</h2>
+
+  <h2 style="color:white">Marvel Comics Network Graph</h2>
 <svelte:window on:resize={resize} />
 
 <div on:resize={resize} class="container">
   {#if activeNode}
     <breadcrumb id="nodeDetails">
-      <strong>{activeNode.id.split(/(?=[A-Z])/).join(' ')}</strong>
+      <strong>{activeNode.id}</strong>
       <br />
       {#if activeNode.details}
         {#each Object.entries(activeNode.details) as detail}
@@ -304,8 +308,11 @@
   <canvas use:fitToContainer bind:this={canvas} />
 </div>
 
+
+ 
+
 <style>
-	:global(body){background-color: #000}
+	:global(body){background-color: #313131}
   canvas {
     float: left;
   }
@@ -319,6 +326,6 @@
     top: 1%;
     left: 1%;
     width: unset;
-		color:#eee;
+		color:#666666;
   }
 </style>

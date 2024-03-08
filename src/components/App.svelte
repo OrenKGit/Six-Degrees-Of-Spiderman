@@ -1,14 +1,16 @@
 <script>
 
   import BarChart from "./BarChart.svelte";
-  import netdata from './cleaned-hero-network.json'
+  //import netdata from './nodes-links.json'
+  import netdata from './10nodes.json'
+  //import netdata from './marvelnodes.json'
   import data from './count-hero-network.json'
-  //console.log('data', netdata)
-  //console.log('cnt', data)
+  import NetworkGraph from "./NetworkGraph.svelte";
 
 </script>
 
 <main>
+  <!--
   <h1><center>Six Degrees of Spiderman</center></h1>
   <h3><center>A Marvel Comics Network Graph</center></h3>  
   <h4><center>
@@ -33,11 +35,11 @@
     <center>
     <b><center>What Have We Done So Far?</center></b>
     <br>
-    So far we have spent the majority of our time discussing and planning out our final visualizations, from choosing our project idea to finding appropriate data.
+    So far we have spent the majority of our time discussing and planning out our final visualizations.
     <br>
     We spent a lot of time finding a suitable dataset to demonstrate the sociology phenomenon that we are aiming to visualize/explain.
     <br>
-    We also spent considerable time attempting to build a basic network graph visualization but haven't yet succeeded since there are a too many nodes that are connected together.
+    We also spent considerable time attempting to build a basic network graph visualization but haven't yet succeeded.
     <br>
     Currently we have a chart showing the most connected Marvel characters that will serve as extra information
     <br>
@@ -49,20 +51,23 @@
     <br>
     We have already been struggling to implement the network graph and we believe our desired final implementation will require
     <br>
-    a shortest path algorithm on top of animations on the network graph. We are also considering implementing a scrollytelling of the network graph 
-    <br>
-    to zoom into specific nodes and explore components of it, but we think it will most likely be difficult to make it functional and clean.
+    a shortest path algorithm on top of animations on the network graph.
     <br>
     We plan to allow the reader to select two heroes of their choice through a dropdown menu which will then show 
     <br>
     how these two heroes are connected to eachother through comic appearances, growing edge by edge on the graph.
     </center>
   </div>
+  -->
+    <div class="chart">
+      <NetworkGraph graph={netdata}/>
+    </div>
 
   
 </main>
 
 <style>
+  /*
   :global(body) {
     margin: 0;
     padding: 0;
@@ -84,21 +89,6 @@
     cursor: pointer;
   }
 
-  .overlay {
-    font-size: 0.9em;
-    background-color: rgba(100, 100, 100, 0.1);
-    position: absolute;
-    min-width:250px;
-    width: 15%;
-    top: 10px;
-    right: 10px;
-    padding: 10px;
-    z-index: 3;
-    font-family: sans-serif;
-    font-weight: lighter;
-    color: rgba(200, 200, 200, 1);
-  }
-
   label {
     font-size: 1.5em;
     font-family: sans-serif;
@@ -113,6 +103,7 @@
   }
 
   /* Hide default HTML checkbox */
+  /*
   .switch input {
     opacity: 0;
     width: 0;
@@ -120,6 +111,7 @@
   }
 
   /* The slider */
+  /*
   .slider {
     position: absolute;
     cursor: pointer;
@@ -159,6 +151,7 @@
   }
 
   /* Rounded sliders */
+  /*
   .slider.round {
     border-radius: 34px;
   }
@@ -166,5 +159,16 @@
   .slider.round:before {
     border-radius: 50%;
   }
-
+  */
+  
+	.chart {
+		width: 100%;
+		max-width: 640px;
+    height: 500px;
+		/*height: calc(100% - 4em);*/
+		min-height: 280px;
+		max-height: 4080px;
+		margin: 0 auto;
+	}
+  
 </style>
