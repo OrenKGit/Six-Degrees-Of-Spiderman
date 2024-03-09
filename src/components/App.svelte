@@ -20,6 +20,8 @@
 		min-height: 280px;
 		max-height: 4080px;
 		margin: 0 auto;
+    border-style: solid;
+    border: 10px;
 	}
   
 </style>

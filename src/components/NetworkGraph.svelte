@@ -32,7 +32,7 @@
       .filter((link) => link.source == d.id || link.target == d.id)
       .map((link) => link.value)
       .reduce((a, b) => a + b), 2);
-    if (d.id == "you") {
+    if (d.id == "u") {
       max = d.size;
       d.details.messages = max;
     }
@@ -40,94 +40,8 @@
   });
 
   function groupColour(context, d) {
-    let nodesize = 2 + Math.sqrt(d.size) / 5;
-    
-    let radgrad = context.createRadialGradient(
-      d.x,
-      d.y,
-      nodesize / 3,
-      d.x,
-      d.y,
-      nodesize / 2
-    );
-    radgrad.addColorStop(0, "#01abfc");
-    radgrad.addColorStop(0.1, "#01abfc");
-    radgrad.addColorStop(1, "#01abfc00");
-
-    let radgrad2 = context.createRadialGradient(
-      d.x,
-      d.y,
-      nodesize / 3,
-      d.x,
-      d.y,
-      nodesize / 2
-    );
-    radgrad2.addColorStop(0, "#7A17F6");
-    radgrad2.addColorStop(0.1, "#7A17F6");
-    radgrad2.addColorStop(1, "#7A17F600");
-
-    let radgrad3 = context.createRadialGradient(
-      d.x,
-      d.y,
-      nodesize / 3,
-      d.x,
-      d.y,
-      nodesize / 2
-    );
-    radgrad3.addColorStop(0, "#B635E3");
-    radgrad3.addColorStop(0.1, "#B635E3");
-    radgrad3.addColorStop(1, "#B635E300");
-
-    let radgrad4 = context.createRadialGradient(
-      d.x,
-      d.y,
-      nodesize / 3,
-      d.x,
-      d.y,
-      nodesize / 2
-    );
-    radgrad4.addColorStop(0, "#E4158B");
-    radgrad4.addColorStop(0.1, "#E4158B");
-    radgrad4.addColorStop(1, "#E4158B00");
-
-    let radgrad5 = context.createRadialGradient(
-      d.x,
-      d.y,
-      nodesize / 3,
-      d.x,
-      d.y,
-      nodesize / 2
-    );
-    radgrad5.addColorStop(0, "#F9123B");
-    radgrad5.addColorStop(0.1, "#F9123B");
-    radgrad5.addColorStop(1, "#F9123B00");
-    /*
-    let radgrad6 = context.createRadialGradient(
-      d.x,
-      d.y,
-      nodesize / 3,
-      d.x,
-      d.y,
-      nodesize / 2
-    );
-    radgrad6.addColorStop(0, "#F2999B");
-    radgrad6.addColorStop(0.1, "#F2999B");
-    radgrad6.addColorStop(1, "#F2999B00");
-
-    let radgrad7 = context.createRadialGradient(
-      d.x,
-      d.y,
-      nodesize / 3,
-      d.x,
-      d.y,
-      nodesize / 2
-    );
-    radgrad7.addColorStop(0, "#E1911B");
-    radgrad7.addColorStop(0.1, "#E1911B");
-    radgrad7.addColorStop(1, "#E1911BB00");
-    , radgrad6, radgrad7
-    */
-    let radgrads = [radgrad, radgrad2, radgrad3, radgrad4, radgrad5];
+    let nodesize = 2 + Math.sqrt(d.size) / 1;
+    let radgrads = ["#9b5fe0", "#16a4d8", "#60dbe8", "#8bd346", "#efdf48", "#f9a52c",  "#d64e12"];
     return radgrads[d.group];
   }
   let showCard;
@@ -141,13 +55,15 @@
 
     simulation = d3
       .forceSimulation(nodes)
+      .alphaTarget(0) // stay hot
+      //.velocityDecay(0.9)
       .force(
         "link",
         d3
           .forceLink(links)
           .id((d) => d.id)
           .distance(
-            (d) => Math.pow(2, -d.value / 1) / 10
+            (d) => Math.pow(2, -d.value / 1) / 10//10
             //(d) => 2 + Math.sqrt(max) / 4 + 130 * Math.pow(2, -d.value / 1)
           )
       )
@@ -189,7 +105,7 @@
       .call(
         d3
           .zoom()
-          .scaleExtent([1 / 100, 8])
+          .scaleExtent([0, 10])//([1 / 15, 15/15])
           .on("zoom", zoomed)
       );
   });
@@ -208,26 +124,36 @@
       context.strokeStyle = "#999";
       context.lineWidth = Math.cbrt(d.value) / 1;
       context.stroke();
-      context.globalAlpha = 1;
+      context.globalAlpha = 0.9;
     });
 
     nodes.forEach((d, i) => {
       context.beginPath();
       context.arc(d.x, d.y, 2 + Math.sqrt(d.size) / 5, 0, 2 * Math.PI);
-      context.strokeStyle = "transparent";
+      context.strokeStyle = "solid";
       context.lineWidth = 1.5;
       context.stroke();
       context.fillStyle = groupColour(context, d);
       context.fill();
-      context.font = '100px serif';
-      if (d.size > max / 50) {
-        context.fillStyle = "white";
+      context.font = 'lighter 100px sans-serif';
+      if (d.size > 5000000) {
+        context.fillStyle = "black";
         d.name
           .split(/(?=[A-Z])/)
           .forEach((word, index) =>
-            context.fillText(d.name, d.x - (d.name.length/2) * 50, d.y)
+            context.fillText(d.name, d.x - (d.name.length * 25), d.y)
           );
         
+      }
+      else {
+        //context.font = d.size/(d.size/10) + 'px sans-serif'
+        context.font = 'lighter 20px sans-serif';
+        context.fillStyle = "black";
+        d.name
+          .split(/(?=[A-Z])/)
+          .forEach((word, index) =>
+            context.fillText(d.name, d.x - (d.name.length * 5), d.y)
+          );
       }
     });
     context.restore();
@@ -254,7 +180,7 @@
   }
 
   function dragstarted(currentEvent) {
-    if (!currentEvent.active) simulation.alphaTarget(0.3).restart();
+    if (!currentEvent.active) simulation.alphaTarget(0.01).restart();
     currentEvent.subject.fx = transform.invertX(currentEvent.subject.x);
     currentEvent.subject.fy = transform.invertY(currentEvent.subject.y);
   }
@@ -312,7 +238,7 @@
  
 
 <style>
-	:global(body){background-color: #313131}
+	:global(body){background-color: #ffffff; font-family: sans-serif; font-weight: lighter;}
   canvas {
     float: left;
   }
@@ -320,12 +246,15 @@
     width: 100%;
     height: 90%;
     position: relative;
+    border-color: #000000;
+    border-style: solid;
+    border: 10px;
   }
   #nodeDetails {
     position: absolute;
     top: 1%;
     left: 1%;
     width: unset;
-		color:#666666;
+		color:#000000;
   }
 </style>
