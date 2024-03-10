@@ -55,6 +55,8 @@
 
     simulation = d3
       .forceSimulation(nodes)
+      //.alphaDecay(0.3)
+      //.velocityDecay(0.5)
       .alphaTarget(0) // stay hot
       //.velocityDecay(0.9)
       .force(
@@ -82,6 +84,8 @@
 
       if (d) activeNode = d;
       else activeNode = false;
+
+      simulationUpdate();
     });
 
     d3.select(context.canvas).on("click", () => {
@@ -90,6 +94,7 @@
           JSON.stringify({ id: activeNode.id, details: activeNode.details })
         );
       }
+      //each {}
     });
 
     d3.select(canvas)
@@ -105,8 +110,13 @@
       .call(
         d3
           .zoom()
-          .scaleExtent([0, 10])//([1 / 15, 15/15])
+          .scaleExtent([0.1, 10])
           .on("zoom", zoomed)
+      )
+      .call(
+        d3.zoom().transform,
+        d3.zoomIdentity.translate(width / 2, height / 2)
+        .scale(0.1) 
       );
   });
 
@@ -117,14 +127,27 @@
     context.scale(transform.k, transform.k);
 
     links.forEach((d) => {
-      context.beginPath();
-      context.moveTo(d.source.x, d.source.y);
-      context.lineTo(d.target.x, d.target.y);
-      context.globalAlpha = 0.3;
-      context.strokeStyle = "#999";
-      context.lineWidth = Math.cbrt(d.value) / 1;
-      context.stroke();
-      context.globalAlpha = 0.9;
+      if ((d.source.id === activeNode.id) || (d.target.id === activeNode.id)) {
+          context.beginPath();
+          context.moveTo(d.source.x, d.source.y);
+          context.lineTo(d.target.x, d.target.y);
+          context.globalAlpha = 1;
+          context.strokeStyle = "#999";
+          context.lineWidth = Math.cbrt(d.value) / 0.25;
+          context.stroke();
+          context.globalAlpha = 0.9;
+        }
+      else {
+          context.beginPath();
+          context.moveTo(d.source.x, d.source.y);
+          context.lineTo(d.target.x, d.target.y);
+          context.globalAlpha = 0.3;
+          context.strokeStyle = "#999";
+          context.lineWidth = Math.cbrt(d.value) / 1;
+          context.stroke();
+          context.globalAlpha = 0.9;
+      }
+      
     });
 
     nodes.forEach((d, i) => {
@@ -214,7 +237,7 @@
 </script>
 
 
-  <h2 style="color:white">Marvel Comics Network Graph</h2>
+  <!--<h2 style="color:white">Marvel Comics Network Graph</h2>-->
 <svelte:window on:resize={resize} />
 
 <div on:resize={resize} class="container">
@@ -240,15 +263,16 @@
 <style>
 	:global(body){background-color: #ffffff; font-family: sans-serif; font-weight: lighter;}
   canvas {
-    float: left;
+    float: right;
   }
   .container {
-    width: 100%;
-    height: 90%;
+    width: 80%;
+    height: 100%;
     position: relative;
     border-color: #000000;
     border-style: solid;
     border: 10px;
+    background-color: light-grey;
   }
   #nodeDetails {
     position: absolute;
