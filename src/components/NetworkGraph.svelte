@@ -32,6 +32,10 @@
       .filter((link) => link.source == d.id || link.target == d.id)
       .map((link) => link.value)
       .reduce((a, b) => a + b), 2);
+    d.connections = graph.links
+      .filter((link) => link.source == d.id || link.target == d.id)
+      .map((link) => 1)
+      .reduce((a, b) => a + b);
     if (d.id == "u") {
       max = d.size;
       d.details.messages = max;
@@ -157,6 +161,14 @@
       context.stroke();
       context.fillStyle = groupColour(context, d);
       context.fill();
+      // clickable area
+      /*
+      context.beginPath();
+      context.arc(d.x, d.y, 200, 0, 2 * Math.PI);
+      context.strokeStyle = "solid";
+      context.lineWidth = 1.5;
+      context.stroke();
+      */
       context.font = 'lighter 100px sans-serif';
       if (d.size > 5000000) {
         context.fillStyle = "black";
@@ -192,7 +204,7 @@
     const node = simulation.find(
       transform.invertX(currentEvent.x * dpi),
       transform.invertY(currentEvent.y * dpi),
-      500
+      200
     );
     if (node) {
       node.x = transform.applyX(node.x);
@@ -235,15 +247,16 @@
 
 </script>
 
-
-  <!--<h2 style="color:white">Marvel Comics Network Graph</h2>-->
 <svelte:window on:resize={resize} />
 
 <div on:resize={resize} class="container">
   {#if activeNode}
     <breadcrumb id="nodeDetails">
-      <strong>{activeNode.name}</strong>
-      <br />
+      <strong><b>{activeNode.name}</b></strong>
+      <br>
+      Interactions: {Math.sqrt(activeNode.size)}
+      <br>
+      Connections: {activeNode.connections}
       {#if activeNode.details}
         {#each Object.entries(activeNode.details) as detail}
           {detail[0]}:
@@ -255,9 +268,6 @@
   {/if}
   <canvas use:fitToContainer bind:this={canvas} />
 </div>
-
-
- 
 
 <style>
 	:global(body){background-color: #ffffff; font-family: sans-serif; font-weight: lighter;}
