@@ -121,6 +121,8 @@
         d3.zoomIdentity.translate(width / 2, height / 2)
         .scale(0.1) 
       );
+  
+      d3.select(canvas).dispatch('click');
   });
 
   function simulationUpdate() {
@@ -128,7 +130,7 @@
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     context.translate(transform.x, transform.y);
     context.scale(transform.k, transform.k);
-
+    
     links.forEach((d) => {
       if ((d.source.id === activeNode.id) || (d.target.id === activeNode.id)) {
           context.beginPath();
@@ -152,7 +154,7 @@
       }
       
     });
-
+    
     nodes.forEach((d, i) => {
       context.beginPath();
       context.arc(d.x, d.y, 2 + Math.sqrt(d.size) / 5, 0, 2 * Math.PI);
