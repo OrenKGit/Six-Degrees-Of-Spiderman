@@ -130,8 +130,14 @@
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     context.translate(transform.x, transform.y);
     context.scale(transform.k, transform.k);
-    
+    let activeLinks = []
     links.forEach((d) => {
+      if (d.source.id === activeNode.id) {
+          activeLinks.push(d.target.id);
+      }
+      if (d.target.id === activeNode.id) {
+          activeLinks.push(d.source.id);
+      }
       if ((d.source.id === activeNode.id) || (d.target.id === activeNode.id)) {
           context.beginPath();
           context.moveTo(d.source.x, d.source.y);
@@ -154,23 +160,39 @@
       }
       
     });
-    
+
     nodes.forEach((d, i) => {
-      context.beginPath();
-      context.arc(d.x, d.y, 2 + Math.sqrt(d.size) / 5, 0, 2 * Math.PI);
-      context.strokeStyle = "solid";
-      context.lineWidth = 1.5;
-      context.stroke();
-      context.fillStyle = groupColour(context, d);
-      context.fill();
-      // clickable area
-      /*
-      context.beginPath();
-      context.arc(d.x, d.y, 200, 0, 2 * Math.PI);
-      context.strokeStyle = "solid";
-      context.lineWidth = 1.5;
-      context.stroke();
-      */
+      if (activeNode !== false) {
+        if (activeLinks.includes(d.id) || d.id === activeNode.id) {
+        context.beginPath();
+        context.arc(d.x, d.y, 2 + Math.sqrt(d.size) / 5, 0, 2 * Math.PI);
+        context.strokeStyle = "solid";
+        context.lineWidth = 1.5;
+        context.stroke();
+        context.fillStyle = groupColour(context, d);
+        context.fill();
+        }
+        else {
+          context.beginPath();
+          context.arc(d.x, d.y, 2 + Math.sqrt(d.size) / 5, 0, 2 * Math.PI);
+          context.strokeStyle = "solid";
+          context.lineWidth = 1.5;
+          context.stroke();
+          context.fillStyle = "#555"///groupColour(context, d);
+          context.fill();
+        }
+      }
+      else {
+        context.beginPath();
+        context.arc(d.x, d.y, 2 + Math.sqrt(d.size) / 5, 0, 2 * Math.PI);
+        context.strokeStyle = "solid";
+        context.lineWidth = 1.5;
+        context.stroke();
+        context.fillStyle = groupColour(context, d);
+        context.fill();
+      }
+      
+      
       context.font = 'lighter 100px sans-serif';
       if (d.size > 5000000) {
         context.fillStyle = "black";
