@@ -2,7 +2,7 @@
   import BarChart from "./BarChart.svelte";
   import netdata from './NODES_LINKS.json'
   import NetworkGraph from "./NetworkGraph.svelte";
-  import spiderman from "./spiderman!.png";
+  //import spiderman from "./spiderman!.png";
 </script>
 
 <html lang="en">
