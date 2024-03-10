@@ -79,9 +79,8 @@
       const d = simulation.find(
         transform.invertX(event.offsetX * dpi),
         transform.invertY(event.offsetY * dpi),
-        50
+        1000
       );
-
       if (d) activeNode = d;
       else activeNode = false;
 
@@ -110,7 +109,7 @@
       .call(
         d3
           .zoom()
-          .scaleExtent([0.1, 10])
+          .scaleExtent([0, 10])
           .on("zoom", zoomed)
       )
       .call(
@@ -193,7 +192,7 @@
     const node = simulation.find(
       transform.invertX(currentEvent.x * dpi),
       transform.invertY(currentEvent.y * dpi),
-      50
+      500
     );
     if (node) {
       node.x = transform.applyX(node.x);
