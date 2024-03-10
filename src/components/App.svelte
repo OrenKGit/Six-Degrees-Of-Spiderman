@@ -2,6 +2,7 @@
   import BarChart from "./BarChart.svelte";
   import netdata from './NODES_LINKS.json'
   import NetworkGraph from "./NetworkGraph.svelte";
+  import spiderman from "./spiderman!.png";
 </script>
 
 <html lang="en">
@@ -35,7 +36,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <div class="w3-third w3-center">
       <!--<i class="fa fa-coffee w3-padding-64 w3-text-red w3-margin-right"></i>-->
       <!--https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/1280px-Marvel_Logo.svg.png-->
-      <img class="w3-padding-64 w3-text-red w3-margin-right" src="src/components/spiderman!.png" width=400 height=500>
+      <img class="w3-padding-64 w3-text-red w3-margin-right" src={spiderman} width=400 height=500>
     </div>
 
     <div class="w3-twothird">
