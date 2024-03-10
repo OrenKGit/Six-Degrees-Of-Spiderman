@@ -1,10 +1,11 @@
 <script>
-  import BarChart from "./BarChart.svelte";
+  //import BarChart from "./BarChart.svelte";
   import netdata from './NODES_LINKS.json'
   import NetworkGraph from "./NetworkGraph.svelte";
   //import spiderman from "./spiderman!.png";
 </script>
 
+<main>
 <html lang="en">
 <head>
 <title>Marvel Network Graph</title>
@@ -27,7 +28,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <header class="w3-container w3-center" style="padding:128px 16px;background:#e23636;color:white;">
   <h1 class="w3-margin w3-jumbo"><b>Six Degrees of Spiderman</b></h1>
   <h2 class="w3-margin">A Marvel Comics Network Graph</h2>
-  <p class="w3-large">Data Source: <a href="...">...</a></p>
+  <p class="w3-large"><a href="http://bioinfo.uib.es/~joemiro/marvel.html">Data Source</a></p>
 </header>
 
 <!-- Second Grid -->
@@ -77,20 +78,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <h1 class="w3-margin w3-xlarge">Write Up:</h1>
 </div>
 
-<script>
-// Used to toggle the menu on small screens when clicking on the menu button
-function myFunction() {
-  var x = document.getElementById("navDemo");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-  }
-}
-</script>
-
 </body>
 </html>
+</main>
 
 <style>
   
