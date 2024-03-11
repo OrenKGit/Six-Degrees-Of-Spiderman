@@ -7,6 +7,7 @@
     let groupedView = false;
     let simulation;
 
+
     $: links = graph.links.map((d) => Object.create(d));
     $: nodes = graph.nodes.map((d) => {
         d.size = Math.pow(graph.links
@@ -53,9 +54,8 @@
         .force('charge', d3.forceManyBody().strength(-200).distanceMin(1).distanceMax(50))
         .force('center', d3.forceCenter(svg.clientWidth / 2, svg.clientHeight / 2).strength(0.05))
         .force('collide', d3.forceCollide().radius(d => Math.sqrt(d.size / maxNodeSize) * 100 + 1));
-
-  
-      const node = svgGroup
+          
+        const node = svgGroup
         .selectAll('circle')
         .data(graph.nodes)
         .enter()
@@ -113,6 +113,8 @@
 
         simulation.force('x', d3.forceX().strength(0.05).x(d => groupScale(d.group)));
         simulation.force('y', d3.forceY().strength(0.2).y(svg.clientHeight / 2));
+        simulation.force('cluster').strength(0.7);
+        simulation.force('collide').strength(0.0);
         
       } else {
         // Normal View
@@ -123,6 +125,7 @@
 
         simulation.force('x', d3.forceX().strength(0.05).x(d => groupScale(d.group)));
         simulation.force('y', d3.forceY().strength(0.2).y(svg.clientHeight / 2));
+        simulation.force('collide').strength(0.0);
        
       }
 
@@ -136,5 +139,7 @@
 
   </script>
   
-  <button on:click={toggleView}>Clusters (not working)</button>
+  <!-- comment out and change position -->
+  <!-- <button on:click={toggleView}>Cluster</button> -->
+
   <svg bind:this={svg} width="960" height="600"></svg>
