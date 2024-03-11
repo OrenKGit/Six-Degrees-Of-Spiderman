@@ -3,6 +3,7 @@
   import netdata from './NODES_LINKS.json'
   import NetworkGraph from "./NetworkGraph.svelte";
   import BubbleGraph from "./BubbleGraph.svelte";
+  import ArcGraph from "./ArcGraph.svelte";
   //import spiderman from "./spiderman!.png";
   // import Scrolly from "./Scrolly.svelte";
 
@@ -41,7 +42,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <p class="w3-large"><a href="http://bioinfo.uib.es/~joemiro/marvel.html">Data Source</a></p>
 </header>
 
-<!-- Second Grid -->
+<!-- First Grid -->
 <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
   <div class="w3-content">
     <div class="w3-third w3-center">
@@ -52,38 +53,18 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
     <div class="w3-twothird">
       <h1>Introduction</h1>
-      <h5 class="w3-padding-32">Despite the Earth being populated by more than eight billion people, you are only six mutual connections away from any other person on Earth. This is the crux of the small world phenomenon. Despite the sheer size of the human population and the vast variety of cultures and lifestyles, you are indirectly connected to all other humans on this planet through a chain of social acquaintances.
-      <h5 class="w3-padding-32">Intuitively, this sounds impossible. How is it possible that you know someone, who knows someone, who knows someone, who knows someone, who knows someone, who knows the President of France? Or a Tibetan monk? Or an Antarctic researcher?
-      <h5 class="w3-padding-32">However, a series of experiments in 1969 by Stanley Milgram showed that it was in fact possible. Randomly selected participants sent packages to people they knew on a first-name basis, in hopes of the package eventually reaching a designated target. The average length of the completed chains was six connections, leading Milgram to conclude that all Americans are separated by a mere six degrees of separation. 
-      <h5 class="w3-padding-32">These experiments sparked a wave of interest in social networks, which have led to thought experiments such as the Six Degrees of Kevin Bacon game. Players choose a film actor, connect them to other actors by appearance in the same film, and build a chain to Kevin Bacon. Doing so shows that all actors can be linked to Kevin Bacon in six degrees of separation.
+      <h5 class="w3-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
 
+      <p class="w3-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat.</p>
     </div>
   </div>
 </div>
 
 
 
-<!-- First Grid -->
-<div class="w3-row-padding w3-padding-64 w3-container">
-  <div class="w3-content">
-    <div>
-      <h1><centered>The Network</centered></h1>
-      <div class="chart">
-        <centered><NetworkGraph graph={netdata}/></centered>
-        
-      </div>
-      <h5 class="w3-padding-32"></h5>
-
-      <p class="w3-text-grey"></p>
-    </div>
-
-    <div class="w3-third w3-center">
-      <!--<i class="fa fa-anchor w3-padding-64 w3-text-red"></i>-->
-    </div>
-  </div>
-</div>
-
-<!-- First Grid -->
+<!-- Second Grid -->
 <div class="w3-row-padding w3-padding-64 w3-container">
   <div class="w3-content">
     <div>
@@ -104,6 +85,52 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     </div>
   </div>
 </div>
+
+<!-- Third Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div>
+      <h1><centered>The Network</centered></h1>
+      <div class="chart">
+        <centered><NetworkGraph graph={netdata}/></centered>
+        
+      </div>
+      <h5 class="w3-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+
+      <p class="w3-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+
+    <div class="w3-third w3-center">
+      <!--<i class="fa fa-anchor w3-padding-64 w3-text-red"></i>-->
+    </div>
+  </div>
+</div>
+
+<!-- Fourth Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div>
+      <h1><centered>Arc Diagram</centered></h1>
+      <div>
+        <centered><ArcGraph graph={netdata}/></centered>
+        
+      </div>
+      <h5 class="w3-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+
+      <p class="w3-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+
+    <div class="w3-third w3-center">
+      <!--<i class="fa fa-anchor w3-padding-64 w3-text-red"></i>-->
+    </div>
+  </div>
+</div>
+
+
 <div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
     <h1 class="w3-margin w3-xlarge">Write Up:</h1>
 </div>
