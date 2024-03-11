@@ -7,7 +7,9 @@
     let nodes = graph.nodes;
     let links = graph.links;
     let selectedOrder = 'by group';
+    
 
+    // add dropdown to change between orders 
     function order(nodes, links) {
     const degree = d3.rollup(
       links.flatMap(({ source, target, value }) => [
@@ -28,13 +30,10 @@
     };
   }
     
-    
-  
     onMount(async () => {
 
-    // Specify the chart’s dimensions.
     const width = 800;
-    const step = 14;
+    const step = 3.6; // add a tooltip instead of overlapping text
     const marginTop = 20;
     const marginRight = 20;
     const marginBottom = 20;
@@ -42,22 +41,21 @@
     const height = (nodes.length - 1) * step + marginTop + marginBottom;
     let orders = order(nodes, links);
     const y = d3.scalePoint(orders.get("by group"), [marginTop, height - marginBottom]);
-       
-    
+    // shift to horizontal instead?   
 
-    // A color scale for the nodes and links.
     const color = d3.scaleOrdinal()
         .domain(nodes.map(d => d.group).sort(d3.ascending))
         .range(["#9b5fe0", "#16a4d8", "#60dbe8", "#8bd346", "#efdf48", "#f9a52c", "#d64e12"])
         .unknown("#aaa");
+
+    const groups = new Map(nodes.map(d => [d.id, d.group]));
+
     // A function of a link, that checks that source and target have the same group and returns
     // the group; otherwise null. Used to color the links.
-    const groups = new Map(nodes.map(d => [d.id, d.group]));
     function samegroup({ source, target }) {
         return groups.get(source) === groups.get(target) ? groups.get(source) : null;
     }
 
-    // Create the SVG container.
     const svg = d3.select(svgContainer).append("svg")
         .attr("width", width)
         .attr("height", height)
@@ -148,7 +146,7 @@
             .sort((a, b) => d3.ascending(Y.get(a.id), Y.get(b.id)))
             .transition()
             .duration(750)
-            .delay((d, i) => i * 20) // Make the movement start from the top.
+            .delay((d, i) => i * 20) 
             .attrTween("transform", d => {
             const i = d3.interpolateNumber(Y.get(d.id), y(d.id));
             return t => {
@@ -159,7 +157,7 @@
             });
 
         path.transition()
-            .duration(750 + nodes.length * 20) // Cover the maximum delay of the label transition.
+            .duration(750 + nodes.length * 20) 
             .attrTween("d", d => () => arc(d));
     }
 
