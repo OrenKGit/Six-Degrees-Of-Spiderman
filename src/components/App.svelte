@@ -38,6 +38,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <header class="w3-container w3-center" style="padding:128px 16px;background:#e23636;color:white;">
   <h1 class="w3-margin w3-jumbo"><b>Six Degrees of Spiderman</b></h1>
   <h2 class="w3-margin">A Marvel Comics Network Graph</h2>
+  <h4 class="w3-margin">By Oren Kaplan, Ethan Lin, and Maya Que</h4>
   <p class="w3-large"><a href="http://bioinfo.uib.es/~joemiro/marvel.html">Data Source</a></p>
 </header>
 
@@ -60,6 +61,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     </div>
   </div>
 </div>
+
+
 
 <!-- Second Grid -->
 <div class="w3-row-padding w3-padding-64 w3-container">
