@@ -95,7 +95,9 @@
             .attr("x", -6)
             .attr("dy", "0.35em")
             .attr("fill", d => d3.lab(color(d.group)).darker(2))
-            .text(d => d.name))
+            .text(d => d.name)
+            .classed("label", true)
+            .style("opacity", "0"))
         .call(g => g.append("circle")
             .attr("r", 3)
             .attr("fill", d => color(d.group)));
@@ -116,12 +118,16 @@
             n.id === source && d.id == target || n.id === target && d.id === source
             )));
             path.classed("primary", l => l.source === d.id || l.target === d.id).filter(".primary").raise();
+            d3.selectAll(".label").filter((n) => n === d || links.some(({source, target}) => (
+                n.id === source && d.id == target || n.id === target && d.id === source
+                ))).style("opacity", "1");
         })
         .on("pointerout", () => {
             svg.classed("hover", false);
             label.classed("primary", false);
             label.classed("secondary", false);
             path.classed("primary", false).order();
+            d3.selectAll(".label").style("opacity", "0");
         });
 
     // Add styles for the hover interaction.

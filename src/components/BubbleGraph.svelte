@@ -40,7 +40,8 @@
       svgGroup.attr('transform', event.transform);
     });
 
-  
+    // add transition from random to grouped view
+    // add legend for group categories
     onMount(async () => {
 
         svgGroup = d3.select(svg).append('g'); 
