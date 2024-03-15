@@ -53,11 +53,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
     <div class="w3-twothird">
       <h1>Introduction</h1>
-      <h5 class="w3-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+      <h5 class="w3-padding-32">Despite the Earth being populated by more than eight billion people, you are only six social connections away from any other person on Earth. This is the crux of the small world phenomenon. Despite the sheer size of the human population and the vast variety of cultures and lifestyles, you are indirectly connected to all other humans on this planet through a chain of social acquaintances.
+      <h5 class="w3-padding-3">Intuitively, this sounds impossible. How is it possible that you know someone, who knows someone, who knows someone, who knows someone, who knows someone, who knows the President of France? Or a Tibetan monk? Or an Antarctic researcher?
+      <h5> However, a series of experiments in 1969 by Stanley Milgram showed that it was in fact possible. Randomly selected participants sent packages to people they knew on a first-name basis, who would then send the package onwards, in hopes of the package eventually reaching a designated target. The average length of the completed chains was six connections, leading Milgram to conclude that all Americans are separated by a mere six degrees of separation. 
+      <h5> These experiments sparked a wave of interest in social networks, which have led to thought experiments such as the Six Degrees of Kevin Bacon game. Players choose a film actor, connect them to other actors by appearance in the same film, and build a chain to Kevin Bacon. Doing so shows that all actors can be linked to Kevin Bacon in six degrees of separation.
 
-      <p class="w3-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat.</p>
     </div>
   </div>
 </div>
@@ -73,11 +73,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <centered><BubbleGraph graph={netdata}/></centered>
         
       </div>
-      <h5 class="w3-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
-
-      <p class="w3-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <h5 class="w3-padding-32">To illustrate this concept, we considered using social network data. However, this produced ethical concerns, as it is very difficult to gather this kind of data both comprehensively and with respect for people’s privacy. Therefore, we used the Marvel Comics Universe, which consists of the stories of thousands and thousands of different characters, who often interact with each other in crossovers and collaborations. The comics therefore present us with a full picture of each of these characters’ social networks, which are best represented by a network graph. 
+      <h5>By using a network graph to show the relationships between characters, as well as the strength of the relationship, we can highlight the clusters of characters that have formed. It also allows us to identify how unlikely chains can exist. By following the path between nodes, you can see the connections that link together unlikely character-pairs. For example, Harry Osborn is Spiderman’s friend, and Spiderman knows Wasp, who knows Cyclops. 
     </div>
 
     <div class="w3-third w3-center">
@@ -95,11 +92,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <centered><NetworkGraph graph={netdata}/></centered>
         
       </div>
-      <h5 class="w3-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
-
-      <p class="w3-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <h5 class="w3-padding-32">In our graph, we represent each character as a bubble. The color is determined by the broad affiliation of the character (i.e., Avengers, X-Men, Fantastic Four, etc.) , and the size is determined by the number of connections the character has. A connection is a link between two characters who have interacted in the comics. Interestingly, by linking size to connection count, we find that size also roughly represents how often a character appears in comics, as any appearance in a comic will likely include some form of interaction with other characters. 
+      <h5> By hovering over a character’s bubble, you can see an indicator that shows their name, number of total interactions with other characters, and number of connections. Doing this also grays out the bubbles of other characters that the specified character is not connected to, highlighting who is within one degree of separation from them. By hovering over one character at a time, you can trace paths between any two characters within a couple degrees of separation.
+      <h5>You can also zoom in and out and drag character bubbles around to see how the whole network reacts in a magnetic manner, keeping social clusters connected. This was the most challenging feature to implement, but it allows you to visualize the social distance between a character and others, as they shift around.</h5>
     </div>
 
     <div class="w3-third w3-center">
