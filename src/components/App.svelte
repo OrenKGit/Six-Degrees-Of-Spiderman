@@ -1,18 +1,16 @@
 <script>
-  //import BarChart from "./BarChart.svelte";
   import netdata from './NODES_LINKS.json'
   import NetworkGraph from "./NetworkGraph.svelte";
+  import NetworkGraph2 from "./NetworkGraph2.svelte";
+  import NetworkGraph3 from "./NetworkGraph3.svelte";
+  import NetworkGraph4 from "./NetworkGraph4.svelte";
+  import NetworkGraphFiltered from './NetworkGraphFiltered.svelte';
   import BubbleGraph from "./BubbleGraph.svelte";
   import ArcGraph from "./ArcGraph.svelte";
-  //import spiderman from "./spiderman!.png";
-  // import Scrolly from "./Scrolly.svelte";
+  import spiderdata from "./spiderman_network.json"
+  import thordata from "./thor_network.json"
+  import spiderthordata from "./FILTERED_NODES_LINKS.json"
 
-  // let value;
-  // const steps = [
-  //   "<p>section1</p>",
-  //   "<p>section2</p>",
-  //   "<p>section3</p>",
-  // ];
 </script>
 
 <main>
@@ -33,7 +31,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </head>
 <body>
 
-
 <!-- Header -->
 <header class="w3-container w3-center" style="padding:128px 16px;background:#e23636;color:white;">
   <h1 class="w3-margin w3-jumbo"><b>Six Degrees of Spiderman</b></h1>
@@ -41,6 +38,27 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <h4 class="w3-margin">By Oren Kaplan, Ethan Lin, and Maya Que</h4>
   <p class="w3-large"><a href="http://bioinfo.uib.es/~joemiro/marvel.html">Data Source</a></p>
 </header>
+
+<div class="chart">
+  <centered><NetworkGraph2 graph={netdata}/></centered>
+</div>
+<div class="chart">
+  <centered><NetworkGraph3 graph={netdata}/></centered>
+</div>
+<div class="chart">
+  <centered><NetworkGraph4 graph={netdata}/></centered>
+</div>
+
+<div class="chart">
+  <centered><NetworkGraph graph={spiderdata}/></centered>
+</div>
+<div class="chart">
+  <centered><NetworkGraph graph={thordata}/></centered>
+</div>
+
+<div class="chart">
+  <centered><NetworkGraph graph={spiderthordata}/></centered>
+</div>
 
 <!-- First Grid -->
 <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">

@@ -1,0 +1,116 @@
+{
+  "nodes": [
+    {
+      "betweenness": 0.0,
+      "degree": 0.0544554455,
+      "eigenvector": 0.0066484387,
+      "group": 5,
+      "id": "10619",
+      "name": "Karnilla [Asgardian]"
+    },
+    {
+      "betweenness": 1.64196e-05,
+      "degree": 0.0693069307,
+      "eigenvector": 0.016135919,
+      "group": 5,
+      "id": "11567",
+      "name": "Balder [Asgardian]"
+    },
+    {
+      "betweenness": 0.0002955519,
+      "degree": 0.0495049505,
+      "eigenvector": 0.0033543276,
+      "group": 5,
+      "id": "12644",
+      "name": "Frigga"
+    },
+    {
+      "betweenness": 0.0,
+      "degree": 0.0693069307,
+      "eigenvector": 0.0153687022,
+      "group": 5,
+      "id": "10907",
+      "name": "Hogun [Asgardian]"
+    },
+    {
+      "betweenness": 6.56782e-05,
+      "degree": 0.0693069307,
+      "eigenvector": 0.0159065529,
+      "group": 5,
+      "id": "10906",
+      "name": "Volstagg"
+    },
+    {
+      "betweenness": 0.0005828941,
+      "degree": 0.0643564356,
+      "eigenvector": 0.0069786467,
+      "group": 5,
+      "id": "10909",
+      "name": "Vizier"
+    },
+    {
+      "betweenness": 0.0084068108,
+      "degree": 0.0594059406,
+      "eigenvector": 0.0093556443,
+      "group": 5,
+      "id": "11155",
+      "name": "Kincaid Dr. Jane Fo"
+    },
+    {
+      "betweenness": 0.0003612302,
+      "degree": 0.0841584158,
+      "eigenvector": 0.0230618575,
+      "group": 5,
+      "id": "10910",
+      "name": "Odin [Asgardian]"
+    },
+    {
+      "betweenness": 0.0,
+      "degree": 0.0643564356,
+      "eigenvector": 0.0097271918,
+      "group": 5,
+      "id": "10620",
+      "name": "Heimdall [Asgardian]"
+    },
+    {
+      "betweenness": 0.0264978737,
+      "degree": 0.1138613861,
+      "eigenvector": 0.017642004,
+      "group": 5,
+      "id": "10621",
+      "name": "Enchantress"
+    },
+    {
+      "betweenness": 0.0006711492,
+      "degree": 0.0891089109,
+      "eigenvector": 0.0198906407,
+      "group": 5,
+      "id": "10622",
+      "name": "Loki [Asgardian]"
+    },
+    {
+      "betweenness": 0.0308724529,
+      "degree": 0.4158415842,
+      "eigenvector": 0.1972434159,
+      "group": 5,
+      "id": "10625",
+      "name": "Thor"
+    },
+    {
+      "betweenness": 0.0,
+      "degree": 0.0693069307,
+      "eigenvector": 0.0167330488,
+      "group": 5,
+      "id": "11149",
+      "name": "Sif"
+    },
+    {
+      "betweenness": 0.0,
+      "degree": 0.0693069307,
+      "eigenvector": 0.0153607326,
+      "group": 5,
+      "id": "10908",
+      "name": "Fandral [Asgardian]"
+    }
+  ],
+  "links": [{"source":"10910","target":"10625","id":229263,"value":137},{"source":"10907","target":"10908","id":229195,"value":123},{"source":"10906","target":"10907","id":229194,"value":118},{"source":"10906","target":"10908","id":229192,"value":114},{"source":"10625","target":"11149","id":229252,"value":111},{"source":"11567","target":"10625","id":229204,"value":106},{"source":"10625","target":"10906","id":229272,"value":103},{"source":"10625","target":"10907","id":229210,"value":96},{"source":"10908","target":"10625","id":229259,"value":96},{"source":"10625","target":"10622","id":234793,"value":93},{"source":"11567","target":"11149","id":229249,"value":87},{"source":"11567","target":"10907","id":229250,"value":86},{"source":"11567","target":"10910","id":229248,"value":85},{"source":"11567","target":"10906","id":229256,"value":83},{"source":"10910","target":"11149","id":238769,"value":81},{"source":"11567","target":"10908","id":229246,"value":79},{"source":"10906","target":"10910","id":229193,"value":76},{"source":"10908","target":"10910","id":229213,"value":75},{"source":"10907","target":"11149","id":229254,"value":74},{"source":"10908","target":"11149","id":229261,"value":74},{"source":"10622","target":"10910","id":238764,"value":72},{"source":"10907","target":"10910","id":229196,"value":71},{"source":"10906","target":"11149","id":229245,"value":67},{"source":"10625","target":"10620","id":229209,"value":61},{"source":"10625","target":"11155","id":226730,"value":59},{"source":"10620","target":"10910","id":229217,"value":58},{"source":"10622","target":"11567","id":238767,"value":56},{"source":"10622","target":"11149","id":238766,"value":52},{"source":"10908","target":"10622","id":238822,"value":52},{"source":"10906","target":"10622","id":238812,"value":51},{"source":"10620","target":"10906","id":229257,"value":50},{"source":"10907","target":"10622","id":238809,"value":50},{"source":"10620","target":"10907","id":229223,"value":48},{"source":"10620","target":"10908","id":229219,"value":48},{"source":"10620","target":"11149","id":229224,"value":48},{"source":"11567","target":"10619","id":243843,"value":46},{"source":"10620","target":"11567","id":238750,"value":45},{"source":"10625","target":"10619","id":229233,"value":43},{"source":"10625","target":"10909","id":231963,"value":43},{"source":"10625","target":"10621","id":238283,"value":41},{"source":"10909","target":"10910","id":229191,"value":40},{"source":"10620","target":"10622","id":238860,"value":39},{"source":"10908","target":"10909","id":239139,"value":38},{"source":"10906","target":"10909","id":243844,"value":37},{"source":"10910","target":"11155","id":238749,"value":37},{"source":"11149","target":"10619","id":229225,"value":36},{"source":"10907","target":"10619","id":229228,"value":34},{"source":"10907","target":"10909","id":239140,"value":33},{"source":"11567","target":"10909","id":231947,"value":31},{"source":"10909","target":"11149","id":239141,"value":30},{"source":"10906","target":"10619","id":243845,"value":29},{"source":"10908","target":"10619","id":243846,"value":29},{"source":"10910","target":"10619","id":253683,"value":29},{"source":"11567","target":"11155","id":238756,"value":28},{"source":"10622","target":"10619","id":240449,"value":27},{"source":"10908","target":"10621","id":251235,"value":27},{"source":"10620","target":"10909","id":243973,"value":26},{"source":"10620","target":"10621","id":251238,"value":25},{"source":"10621","target":"10622","id":238826,"value":24},{"source":"10621","target":"11567","id":238825,"value":24},{"source":"11149","target":"10621","id":243860,"value":24},{"source":"10907","target":"10621","id":243867,"value":23},{"source":"10910","target":"10621","id":253825,"value":23},{"source":"10622","target":"12644","id":238864,"value":22},{"source":"10622","target":"10909","id":276424,"value":21},{"source":"11149","target":"12644","id":238875,"value":21},{"source":"11155","target":"11149","id":263783,"value":21},{"source":"12644","target":"10907","id":238846,"value":21},{"source":"10620","target":"12644","id":238859,"value":20},{"source":"10625","target":"12644","id":238867,"value":19},{"source":"10906","target":"10621","id":251250,"value":19},{"source":"10907","target":"11155","id":263918,"value":19},{"source":"10908","target":"12644","id":238868,"value":19},{"source":"10620","target":"10619","id":229221,"value":18},{"source":"10906","target":"12644","id":238865,"value":18},{"source":"10910","target":"12644","id":238862,"value":18},{"source":"12644","target":"11567","id":238845,"value":17},{"source":"11155","target":"10622","id":238762,"value":16},{"source":"10908","target":"11155","id":263817,"value":15},{"source":"11155","target":"10620","id":239181,"value":15},{"source":"11155","target":"10906","id":263784,"value":15},{"source":"10621","target":"10909","id":231954,"value":14},{"source":"10909","target":"10619","id":243847,"value":12},{"source":"10621","target":"10619","id":243871,"value":11},{"source":"12644","target":"10621","id":253632,"value":11},{"source":"11155","target":"10909","id":301193,"value":10}]}
