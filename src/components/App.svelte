@@ -50,11 +50,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
     <div class="w3-twothird">
       <h1>Introduction</h1>
-      <h5 class="w3-padding-32">Despite the Earth being populated by more than eight billion people, you are only six social connections away from any other person on Earth. This is the crux of the small world phenomenon. Despite the sheer size of the human population and the vast variety of cultures and lifestyles, you are indirectly connected to all other humans on this planet through a chain of social acquaintances.
+      <h5 class="w3-padding-32">Despite the Earth being populated by more than eight billion people, you are only about six social connections away from any other person on Earth. This is the crux of the small world phenomenon. Despite the sheer size of the human population and the vast variety of cultures and lifestyles, you are indirectly connected to all other humans on this planet through a short chain of social acquaintances.
       <h5 class="w3-padding-3">Intuitively, this sounds impossible. How is it possible that you know someone, who knows someone, who knows someone, who knows someone, who knows someone, who knows the President of France? Or a Tibetan monk? Or an Antarctic researcher?
-      <h5> However, a series of experiments in 1969 by Stanley Milgram showed that it was in fact possible. Randomly selected participants sent packages to people they knew on a first-name basis, who would then send the package onwards, in hopes of the package eventually reaching a designated target. The average length of the completed chains was six connections, leading Milgram to conclude that all Americans are separated by a mere six degrees of separation. 
-      <h5> These experiments sparked a wave of interest in social networks, which have led to thought experiments such as the Six Degrees of Kevin Bacon game. Players choose a film actor, connect them to other actors by appearance in the same film, and build a chain to Kevin Bacon. Doing so shows that all actors can be linked to Kevin Bacon in six degrees of separation.
-
+      <h5 class="w3-padding-3">To answer this, we can turn to the Marvel superhero comic books, which consist of the stories of thousands and thousands of different characters, who often interact with each other in crossovers and collaborations. The comics therefore present us with a full picture of each of these characters’ social networks. 
     </div>
   </div>
 </div>
@@ -88,10 +86,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       <div class="chart">
         <centered><NetworkGraph graph={spiderdata}/></centered>
       </div>
-      <h5 class="w3-padding-32">In our graph, we represent each character as a bubble. The color is determined by the broad affiliation of the character (i.e., Avengers, X-Men, Fantastic Four, etc.) , and the size is determined by the number of connections the character has. A connection is a link between two characters who have interacted in the comics. Interestingly, by linking size to connection count, we find that size also roughly represents how often a character appears in comics, as any appearance in a comic will likely include some form of interaction with other characters. 
-      <h5> By hovering over a character’s bubble, you can see an indicator that shows their name, number of total interactions with other characters, and number of connections. Doing this also grays out the bubbles of other characters that the specified character is not connected to, highlighting who is within one degree of separation from them. By hovering over one character at a time, you can trace paths between any two characters within a couple degrees of separation.
-      <h5>You can also zoom in and out and drag character bubbles around to see how the whole network reacts in a magnetic manner, keeping social clusters connected. This was the most challenging feature to implement, but it allows you to visualize the social distance between a character and others, as they shift around.</h5>
-    </div>
+      <br><br>
+      <h5 class="w3-padding-32">This is Spider-Man, his family, his friends, and his enemies. They live in New York and, for the most part, consist of regular human beings (don't worry about the second Spider-Man, that's a clone running around).
+      </div>
 
     <div class="w3-third w3-center">
       <!--<i class="fa fa-anchor w3-padding-64 w3-text-red"></i>-->
@@ -108,10 +105,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <centered><NetworkGraph graph={thordata}/></centered>
       </div>
       
-      <h5 class="w3-padding-32">In our graph, we represent each character as a bubble. The color is determined by the broad affiliation of the character (i.e., Avengers, X-Men, Fantastic Four, etc.) , and the size is determined by the number of connections the character has. A connection is a link between two characters who have interacted in the comics. Interestingly, by linking size to connection count, we find that size also roughly represents how often a character appears in comics, as any appearance in a comic will likely include some form of interaction with other characters. 
-      <h5> By hovering over a character’s bubble, you can see an indicator that shows their name, number of total interactions with other characters, and number of connections. Doing this also grays out the bubbles of other characters that the specified character is not connected to, highlighting who is within one degree of separation from them. By hovering over one character at a time, you can trace paths between any two characters within a couple degrees of separation.
-      <h5>You can also zoom in and out and drag character bubbles around to see how the whole network reacts in a magnetic manner, keeping social clusters connected. This was the most challenging feature to implement, but it allows you to visualize the social distance between a character and others, as they shift around.</h5>
-    </div>
+      <h5 class="w3-padding-32"> This is Thor, his family, his friends, and his enemies. They live on Asgard, the mythical home of the Norse Gods and, for the most part, consist of the aforementioned Norse Gods.
+      <h5>That being the case, if Hogun, an Asgardian, wanted to get his favorite sword signed by Daredevil, a human man, how would he pass it along to make that happen?</h5>
+      </div>
 
     <div class="w3-third w3-center">
       <!--<i class="fa fa-anchor w3-padding-64 w3-text-red"></i>-->
@@ -127,10 +123,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       <div class="chart">
         <centered><NetworkGraph graph={spiderthordata}/></centered>
       </div>
-      <h5 class="w3-padding-32">In our graph, we represent each character as a bubble. The color is determined by the broad affiliation of the character (i.e., Avengers, X-Men, Fantastic Four, etc.) , and the size is determined by the number of connections the character has. A connection is a link between two characters who have interacted in the comics. Interestingly, by linking size to connection count, we find that size also roughly represents how often a character appears in comics, as any appearance in a comic will likely include some form of interaction with other characters. 
-      <h5> By hovering over a character’s bubble, you can see an indicator that shows their name, number of total interactions with other characters, and number of connections. Doing this also grays out the bubbles of other characters that the specified character is not connected to, highlighting who is within one degree of separation from them. By hovering over one character at a time, you can trace paths between any two characters within a couple degrees of separation.
-      <h5>You can also zoom in and out and drag character bubbles around to see how the whole network reacts in a magnetic manner, keeping social clusters connected. This was the most challenging feature to implement, but it allows you to visualize the social distance between a character and others, as they shift around.</h5>
-    </div>
+      <h5 class="w3-padding-32">Quite easily, actually! Due to Thor and Spider-Man being teammates on the Avengers, the two groups share a fair amount of inter-group connections. Heimdall could simply pass it to Thor, who could pass it to Spider-Man, who could pass it to Daredevil, allowing Heimdall to get his sword signed by his favorite superhero! Despite being two very different people from two very different worlds, Hogun and Daredevil are only three degrees of separation apart!
+        </div>
 
     <div class="w3-third w3-center">
       <!--<i class="fa fa-anchor w3-padding-64 w3-text-red"></i>-->
@@ -146,9 +140,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       <div class="chart">
         <centered><NetworkGraph2 graph={netdata}/></centered>
       </div>
-      <h5 class="w3-padding-32">In our graph, we represent each character as a bubble. The color is determined by the broad affiliation of the character (i.e., Avengers, X-Men, Fantastic Four, etc.) , and the size is determined by the number of connections the character has. A connection is a link between two characters who have interacted in the comics. Interestingly, by linking size to connection count, we find that size also roughly represents how often a character appears in comics, as any appearance in a comic will likely include some form of interaction with other characters. 
-      <h5> By hovering over a character’s bubble, you can see an indicator that shows their name, number of total interactions with other characters, and number of connections. Doing this also grays out the bubbles of other characters that the specified character is not connected to, highlighting who is within one degree of separation from them. By hovering over one character at a time, you can trace paths between any two characters within a couple degrees of separation.
-      <h5>You can also zoom in and out and drag character bubbles around to see how the whole network reacts in a magnetic manner, keeping social clusters connected. This was the most challenging feature to implement, but it allows you to visualize the social distance between a character and others, as they shift around.</h5>
+      <h5 class="w3-padding-32">Now let's take a look at another example. Thanos has gotten his hands on the Infinity gauntlet, along with all of the Infinity Stones, giving him god-like powers!
+      <h5>Usually, he would wipe out half of all life in the universe to deal with overpopulation. But since he's feeling nice today, he's only going to erase everyone within three degrees of separation from himself. That won't be too bad, right?
+      <h5>To do so, he decides that with each snap, he'll erase one degree of separation from himself. Snap! A dozen people turn to dust.</h5>
     </div>
 
     <div class="w3-third w3-center">
@@ -165,9 +159,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       <div class="chart">
         <centered><NetworkGraph3 graph={netdata}/></centered>
       </div>
-      <h5 class="w3-padding-32">In our graph, we represent each character as a bubble. The color is determined by the broad affiliation of the character (i.e., Avengers, X-Men, Fantastic Four, etc.) , and the size is determined by the number of connections the character has. A connection is a link between two characters who have interacted in the comics. Interestingly, by linking size to connection count, we find that size also roughly represents how often a character appears in comics, as any appearance in a comic will likely include some form of interaction with other characters. 
-      <h5> By hovering over a character’s bubble, you can see an indicator that shows their name, number of total interactions with other characters, and number of connections. Doing this also grays out the bubbles of other characters that the specified character is not connected to, highlighting who is within one degree of separation from them. By hovering over one character at a time, you can trace paths between any two characters within a couple degrees of separation.
-      <h5>You can also zoom in and out and drag character bubbles around to see how the whole network reacts in a magnetic manner, keeping social clusters connected. This was the most challenging feature to implement, but it allows you to visualize the social distance between a character and others, as they shift around.</h5>
+      <h5 class="w3-padding-32"> Snap! Uh-oh! That wiped out a lot more people than Thanos thought it would!
+      <h5> Now he feels bad, so he decides to stop there.</h5>
     </div>
 
     <div class="w3-third w3-center">
@@ -184,9 +177,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       <div class="chart">
         <centered><NetworkGraph4 graph={netdata}/></centered>
       </div>
-      <h5 class="w3-padding-32">In our graph, we represent each character as a bubble. The color is determined by the broad affiliation of the character (i.e., Avengers, X-Men, Fantastic Four, etc.) , and the size is determined by the number of connections the character has. A connection is a link between two characters who have interacted in the comics. Interestingly, by linking size to connection count, we find that size also roughly represents how often a character appears in comics, as any appearance in a comic will likely include some form of interaction with other characters. 
-      <h5> By hovering over a character’s bubble, you can see an indicator that shows their name, number of total interactions with other characters, and number of connections. Doing this also grays out the bubbles of other characters that the specified character is not connected to, highlighting who is within one degree of separation from them. By hovering over one character at a time, you can trace paths between any two characters within a couple degrees of separation.
-      <h5>You can also zoom in and out and drag character bubbles around to see how the whole network reacts in a magnetic manner, keeping social clusters connected. This was the most challenging feature to implement, but it allows you to visualize the social distance between a character and others, as they shift around.</h5>
+      <h5 class="w3-padding-32">How are there so few people left? While the first snap only erased a small group of people, those people knew a LOT of people. Each one knew at least twenty others, and though there was some overlap, that meant more than a hundred people got erased!
     </div>
 
     <div class="w3-third w3-center">
@@ -195,6 +186,22 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   </div>
 </div>
 
+<!-- The Explanation Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div>
+      <h1><centered>The Small-World Phenomenon</centered></h1>
+      <h5>So how is it that wildly different and distant people can pass things along so quickly? And how is it that even two degrees of separation from one person can include so many people?</h5>
+     <h5> A series of experiments in 1969 by Stanley Milgram showed how this phenomenon could exist in the real world. Randomly selected participants sent packages to people they knew on a first-name basis, who would then send the package onwards, in hopes of the package eventually reaching a designated target. The average length of the completed chains was six connections, leading Milgram to conclude that all Americans are separated by a mere six degrees of separation. 
+        <h5> These experiments sparked a wave of interest in social networks, which have led to thought experiments such as the Six Degrees of Kevin Bacon game. Players choose a film actor, connect them to other actors by appearance in the same film, and build a chain to Kevin Bacon. Doing so shows that all actors can be linked to Kevin Bacon in six degrees of separation.
+      <h5>So if you think about it, you can do the same thing with Spider-Man!</h5>
+        </div>
+
+    <div class="w3-third w3-center">
+      <!--<i class="fa fa-anchor w3-padding-64 w3-text-red"></i>-->
+    </div>
+  </div>
+</div>
 <!-- The Network  Grid -->
 <div class="w3-row-padding w3-padding-64 w3-container">
   <div class="w3-content">
@@ -204,10 +211,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <centered><NetworkGraph graph={netdata}/></centered>
         
       </div>
-      <h5 class="w3-padding-32">In our graph, we represent each character as a bubble. The color is determined by the broad affiliation of the character (i.e., Avengers, X-Men, Fantastic Four, etc.) , and the size is determined by the number of connections the character has. A connection is a link between two characters who have interacted in the comics. Interestingly, by linking size to connection count, we find that size also roughly represents how often a character appears in comics, as any appearance in a comic will likely include some form of interaction with other characters. 
-      <h5> By hovering over a character’s bubble, you can see an indicator that shows their name, number of total interactions with other characters, and number of connections. Doing this also grays out the bubbles of other characters that the specified character is not connected to, highlighting who is within one degree of separation from them. By hovering over one character at a time, you can trace paths between any two characters within a couple degrees of separation.
-      <h5>You can also zoom in and out and drag character bubbles around to see how the whole network reacts in a magnetic manner, keeping social clusters connected. This was the most challenging feature to implement, but it allows you to visualize the social distance between a character and others, as they shift around.</h5>
-    </div>
+      <h5 class="w3-padding-32">While our data does not include every single person in the Marvel comics universe, you can still simulate Milgram's experiment with our network graph! You'll find that randomly picking any character will lead you back to Spider-Man in just a couple connections.
+      <h5> If you'd like a demo explaining how we developed this network graph and how to use it, check out our demo below.</h5>
+      <a href=https://youtu.be/P54tt7OG2Q0>Demo</a>
 
     <div class="w3-third w3-center">
       <!--<i class="fa fa-anchor w3-padding-64 w3-text-red"></i>-->
@@ -224,11 +230,22 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <centered><ArcGraph graph={netdata}/></centered>
         
       </div>
-      <h5 class="w3-padding-32">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</h5>
+      <h5 class="w3-padding-32">We also have this arc diagram to show you how everyone in the dataset knows each other.
+    </div>
 
-      <p class="w3-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div class="w3-third w3-center">
+      <!--<i class="fa fa-anchor w3-padding-64 w3-text-red"></i>-->
+    </div>
+  </div>
+</div>
+
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div>
+      <h1><centered>Conclusion</centered></h1>
+      
+      <h5 class="w3-padding-32">As you can see, the microcosm that is the Marvel Comics reflects the real-world small-world phenomenon. Visualizing the social network within the Marvel Comics Universe shows us how one’s social network often overlaps with a great variety of others, allowing paths to be drawn between incredibly different people. We know that the world feels impossibly large and intimidating, with billions of people on the planet, each with their own cultures, opinions, and personalities. But each person in the world is only about six social connections away. Therefore, by reaching out to the people around you, you can find an infinite amount of new connections, experiences and opportunities. It's probably a lot easier to get your favorite celebrity's signature than you'd think!
+
     </div>
 
     <div class="w3-third w3-center">
@@ -238,9 +255,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </div>
 
 
-<div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
-    <h1 class="w3-margin w3-xlarge">Write Up:</h1>
-</div>
 
 </body>
 </html>
