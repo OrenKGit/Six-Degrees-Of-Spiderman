@@ -82,7 +82,7 @@
         .attr("stroke", d => color(samegroup(d)))
         .attr("d", arc);
 
-    // Add a text label and a dot for each node.
+
     const label = svg.append("g")
         .attr("font-family", "sans-serif")
         .attr("font-size", 10)
@@ -102,7 +102,7 @@
             .attr("r", 3)
             .attr("fill", d => color(d.group)));
 
-    // Add invisible rects that update the class of the elements on mouseover.
+
     label.append("rect")
         .attr("fill", "none")
         .attr("width", marginLeft + 40)
@@ -130,7 +130,7 @@
             d3.selectAll(".label").style("opacity", "0");
         });
 
-    // Add styles for the hover interaction.
+
     svg.append("style").text(`
         .hover text { fill: #aaa; }
         .hover g.primary text { font-weight: bold; fill: #333; }

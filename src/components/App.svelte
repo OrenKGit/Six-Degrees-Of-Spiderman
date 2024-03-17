@@ -1,6 +1,7 @@
 <script>
   import netdata from './NODES_LINKS.json'
   import NetworkGraph from "./NetworkGraph.svelte";
+  import NetworkGraph1 from "./NetworkGraph1.svelte";
   import NetworkGraph2 from "./NetworkGraph2.svelte";
   import NetworkGraph3 from "./NetworkGraph3.svelte";
   import NetworkGraph4 from "./NetworkGraph4.svelte";
@@ -84,7 +85,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <div>
       <h1><centered>Spiderman's Group</centered></h1>
       <div class="chart">
-        <centered><NetworkGraph graph={spiderdata}/></centered>
+        <centered><NetworkGraph1 graph={spiderdata}/></centered>
       </div>
       <br><br>
       <h5 class="w3-padding-32">This is Spider-Man, his family, his friends, and his enemies. They live in New York and, for the most part, consist of regular human beings (don't worry about the second Spider-Man, that's a clone running around).
@@ -102,7 +103,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <div>
       <h1><centered>Thor's Group</centered></h1>
       <div class="chart">
-        <centered><NetworkGraph graph={thordata}/></centered>
+        <centered><NetworkGraph1 graph={thordata}/></centered>
       </div>
       
       <h5 class="w3-padding-32"> This is Thor, his family, his friends, and his enemies. They live on Asgard, the mythical home of the Norse Gods and, for the most part, consist of the aforementioned Norse Gods.
@@ -121,7 +122,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <div>
       <h1><centered>How They Connect</centered></h1>
       <div class="chart">
-        <centered><NetworkGraph graph={spiderthordata}/></centered>
+        <centered><NetworkGraph1 graph={spiderthordata}/></centered>
       </div>
       <h5 class="w3-padding-32">Quite easily, actually! Due to Thor and Spider-Man being teammates on the Avengers, the two groups share a fair amount of inter-group connections. Heimdall could simply pass it to Thor, who could pass it to Spider-Man, who could pass it to Daredevil, allowing Heimdall to get his sword signed by his favorite superhero! Despite being two very different people from two very different worlds, Hogun and Daredevil are only three degrees of separation apart!
         </div>

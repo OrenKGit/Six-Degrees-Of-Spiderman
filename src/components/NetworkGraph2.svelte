@@ -52,6 +52,7 @@
   let transform = d3.zoomIdentity;
   let simulation, context;
   let dpi = 1;
+  let initialZoomScale = 0.06;  //set initial zoom
   onMount(() => {
     dpi = window.devicePixelRatio || 1;
     context = canvas.getContext("2d");
@@ -100,6 +101,10 @@
       //each {}
     });
 
+    let zoom = d3.zoom()
+      .scaleExtent([0, 10])
+      .on("zoom", zoomed);
+    let initialTranslate = [width / 2, height / 2];
     d3.select(canvas)
       .call(
         d3
@@ -110,17 +115,9 @@
           .on("drag", dragged)
           .on("end", dragended)
       )
-      .call(
-        d3
-          .zoom()
-          .scaleExtent([0, 10])
-          .on("zoom", zoomed)
-      )
-      .call(
-        d3.zoom().transform,
-        d3.zoomIdentity.translate(width / 2, height / 2)
-        .scale(0.1) 
-      );
+      .call(zoom)
+      .call(zoom.transform, d3.zoomIdentity.translate(initialTranslate[0], initialTranslate[1]).scale(initialZoomScale));
+
   
       d3.select(canvas).dispatch('click');
   });
