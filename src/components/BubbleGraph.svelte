@@ -31,7 +31,9 @@
         return radgrads[d.group];
     }
 
-
+    const radgrads = ["#9b5fe0", "#16a4d8", "#60dbe8", "#8bd346", "#efdf48", "#f9a52c"];
+    const groupNames = ["Spiderman", "X-Men", "Avengers", "Fantastic Four", "Other Superheroes", "Asgardians"]; 
+    const padding = 50;
     let svgGroup;
 
     const zoom = d3.zoom()
@@ -39,6 +41,13 @@
     .on('zoom', (event) => {
       svgGroup.attr('transform', event.transform);
     });
+
+    const numClusters = 7;
+    const width = 960;
+    const height = 600;
+
+    const xScale = d3.scaleLinear().domain([0, numClusters]).range([padding, width - padding]);
+    const yScale = d3.scaleLinear().domain([0, numClusters]).range([padding, height - padding]);
 
     // add transition from random to grouped view
     // add legend for group categories
@@ -51,11 +60,13 @@
       const maxNodeSize = d3.max(nodes, d => d.size);
   
       simulation = d3.forceSimulation(graph.nodes)
-        .velocityDecay(0.5)
-        .force('charge', d3.forceManyBody().strength(-200).distanceMin(1).distanceMax(50))
-        .force('center', d3.forceCenter(svg.clientWidth / 2, svg.clientHeight / 2).strength(0.05))
-        .force('collide', d3.forceCollide().radius(d => Math.sqrt(d.size / maxNodeSize) * 100 + 1));
-          
+            .velocityDecay(0.5)
+            .force('charge', d3.forceManyBody().strength(-200).distanceMin(1).distanceMax(50))
+            .force('center', d3.forceCenter(width / 2, height / 2))
+            .force('collide', d3.forceCollide().radius(d => Math.sqrt(d.size / maxNodeSize) * 100))
+            .force('x', d3.forceX(d => xScale(d.group)).strength(1)) 
+            .force('y', d3.forceY(d => yScale(d.group)).strength(1)) 
+
         const node = svgGroup
         .selectAll('circle')
         .data(graph.nodes)
@@ -73,6 +84,28 @@
           .attr('cx', d => d.x)
           .attr('cy', d => d.y);
       });
+
+
+      const legend = svgGroup.selectAll('.legend')
+            .data(radgrads)
+            .enter()
+            .append('g')
+            .attr('class', 'legend')
+            .attr('transform', (d, i) => `translate(0,${i * 20})`);
+
+        legend.append('rect')
+            .attr('x', width - 18)
+            .attr('width', 18)
+            .attr('height', 18)
+            .style('fill', d => d);
+
+        legend.append('text')
+            .attr('x', width - 24)
+            .attr('y', 9)
+            .attr('dy', '.35em')
+            .style('text-anchor', 'end')
+            .text((d, i) => groupNames[i]);
+
     });
   
     function drag(simulation) {
@@ -99,48 +132,7 @@
         .on('end', dragended);
     }
 
-    function updateView() {
-      if (!simulation) return;
-
-      const maxNodeSize = d3.max(nodes, d => d.size);
-
-      if (groupedView) {
-        // Grouped View
-        const [minGroup, maxGroup] = d3.extent(nodes, d => d.group);
-        const padding = 5; // Adjust this value to change the amount of space between groups
-        const groupScale = d3.scaleLinear()
-          .domain([minGroup, maxGroup]) 
-          .range([padding, svg.clientWidth - padding]);
-
-        simulation.force('x', d3.forceX().strength(0.05).x(d => groupScale(d.group)));
-        simulation.force('y', d3.forceY().strength(0.2).y(svg.clientHeight / 2));
-        simulation.force('cluster').strength(0.7);
-        simulation.force('collide').strength(0.0);
-        
-      } else {
-        // Normal View
-        const [minGroup, maxGroup] = d3.extent(nodes, d => d.group);
-        const groupScale = d3.scaleLinear()
-          .domain([minGroup, maxGroup]) 
-          .range([0, svg.clientWidth]);
-
-        simulation.force('x', d3.forceX().strength(0.05).x(d => groupScale(d.group)));
-        simulation.force('y', d3.forceY().strength(0.2).y(svg.clientHeight / 2));
-        simulation.force('collide').strength(0.0);
-       
-      }
-
-      simulation.alpha(1).restart();
-    }
-
-    function toggleView() {
-      groupedView = !groupedView;
-      updateView();
-    }
-
+    
   </script>
-  
-  <!-- comment out and change position -->
-  <!-- <button on:click={toggleView}>Cluster</button> -->
 
   <svg bind:this={svg} width="960" height="600"></svg>

@@ -8,9 +8,24 @@
   import NetworkGraphFiltered from './NetworkGraphFiltered.svelte';
   import BubbleGraph from "./BubbleGraph.svelte";
   import ArcGraph from "./ArcGraph.svelte";
-  import spiderdata from "./spiderman_network.json"
-  import thordata from "./thor_network.json"
-  import spiderthordata from "./FILTERED_NODES_LINKS.json"
+  import spiderdata from "./spiderman_network.json";
+  import thordata from "./thor_network.json";
+  import spiderthordata from "./FILTERED_NODES_LINKS.json";
+
+  import { onMount } from "svelte";
+  import Scroller from "./Scroller.svelte";
+  import Arrow from "./Arrow.svelte";
+  import { getMotion } from "../lib/utils.js";
+
+
+  const threshold = 0.65;
+	// State
+	let id = {}; // Object to hold visible section IDs of Scroller components
+  let animation = getMotion();
+	let idPrev = {}; // Object to keep track of previous IDs, to compare for changes
+	onMount(() => {
+		idPrev = {...id};
+	});
 
 </script>
 
@@ -38,6 +53,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <h2 class="w3-margin">A Marvel Comics Network Graph</h2>
   <h4 class="w3-margin">By Oren Kaplan, Ethan Lin, and Maya Que</h4>
   <p class="w3-large"><a href="http://bioinfo.uib.es/~joemiro/marvel.html">Data Source</a></p>
+  <div style="margin-top: 90px;">
+		<Arrow color="white">Scroll to begin</Arrow>
+	</div>
 </header>
 
 <!-- First Grid -->
