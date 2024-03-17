@@ -1,18 +1,16 @@
 <script>
-  //import BarChart from "./BarChart.svelte";
   import netdata from './NODES_LINKS.json'
   import NetworkGraph from "./NetworkGraph.svelte";
+  import NetworkGraph2 from "./NetworkGraph2.svelte";
+  import NetworkGraph3 from "./NetworkGraph3.svelte";
+  import NetworkGraph4 from "./NetworkGraph4.svelte";
+  import NetworkGraphFiltered from './NetworkGraphFiltered.svelte';
   import BubbleGraph from "./BubbleGraph.svelte";
   import ArcGraph from "./ArcGraph.svelte";
-  //import spiderman from "./spiderman!.png";
-  // import Scrolly from "./Scrolly.svelte";
+  import spiderdata from "./spiderman_network.json"
+  import thordata from "./thor_network.json"
+  import spiderthordata from "./FILTERED_NODES_LINKS.json"
 
-  // let value;
-  // const steps = [
-  //   "<p>section1</p>",
-  //   "<p>section2</p>",
-  //   "<p>section3</p>",
-  // ];
 </script>
 
 <main>
@@ -32,7 +30,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </style>
 </head>
 <body>
-
 
 <!-- Header -->
 <header class="w3-container w3-center" style="padding:128px 16px;background:#e23636;color:white;">
@@ -83,7 +80,122 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   </div>
 </div>
 
-<!-- Third Grid -->
+<!-- Spider Group Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div>
+      <h1><centered>Spiderman's Group</centered></h1>
+      <div class="chart">
+        <centered><NetworkGraph graph={spiderdata}/></centered>
+      </div>
+      <h5 class="w3-padding-32">In our graph, we represent each character as a bubble. The color is determined by the broad affiliation of the character (i.e., Avengers, X-Men, Fantastic Four, etc.) , and the size is determined by the number of connections the character has. A connection is a link between two characters who have interacted in the comics. Interestingly, by linking size to connection count, we find that size also roughly represents how often a character appears in comics, as any appearance in a comic will likely include some form of interaction with other characters. 
+      <h5> By hovering over a character’s bubble, you can see an indicator that shows their name, number of total interactions with other characters, and number of connections. Doing this also grays out the bubbles of other characters that the specified character is not connected to, highlighting who is within one degree of separation from them. By hovering over one character at a time, you can trace paths between any two characters within a couple degrees of separation.
+      <h5>You can also zoom in and out and drag character bubbles around to see how the whole network reacts in a magnetic manner, keeping social clusters connected. This was the most challenging feature to implement, but it allows you to visualize the social distance between a character and others, as they shift around.</h5>
+    </div>
+
+    <div class="w3-third w3-center">
+      <!--<i class="fa fa-anchor w3-padding-64 w3-text-red"></i>-->
+    </div>
+  </div>
+</div>
+
+<!-- Thor Group Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div>
+      <h1><centered>Thor's Group</centered></h1>
+      <div class="chart">
+        <centered><NetworkGraph graph={thordata}/></centered>
+      </div>
+      
+      <h5 class="w3-padding-32">In our graph, we represent each character as a bubble. The color is determined by the broad affiliation of the character (i.e., Avengers, X-Men, Fantastic Four, etc.) , and the size is determined by the number of connections the character has. A connection is a link between two characters who have interacted in the comics. Interestingly, by linking size to connection count, we find that size also roughly represents how often a character appears in comics, as any appearance in a comic will likely include some form of interaction with other characters. 
+      <h5> By hovering over a character’s bubble, you can see an indicator that shows their name, number of total interactions with other characters, and number of connections. Doing this also grays out the bubbles of other characters that the specified character is not connected to, highlighting who is within one degree of separation from them. By hovering over one character at a time, you can trace paths between any two characters within a couple degrees of separation.
+      <h5>You can also zoom in and out and drag character bubbles around to see how the whole network reacts in a magnetic manner, keeping social clusters connected. This was the most challenging feature to implement, but it allows you to visualize the social distance between a character and others, as they shift around.</h5>
+    </div>
+
+    <div class="w3-third w3-center">
+      <!--<i class="fa fa-anchor w3-padding-64 w3-text-red"></i>-->
+    </div>
+  </div>
+</div>
+
+<!-- Combined Groups Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div>
+      <h1><centered>How They Connect</centered></h1>
+      <div class="chart">
+        <centered><NetworkGraph graph={spiderthordata}/></centered>
+      </div>
+      <h5 class="w3-padding-32">In our graph, we represent each character as a bubble. The color is determined by the broad affiliation of the character (i.e., Avengers, X-Men, Fantastic Four, etc.) , and the size is determined by the number of connections the character has. A connection is a link between two characters who have interacted in the comics. Interestingly, by linking size to connection count, we find that size also roughly represents how often a character appears in comics, as any appearance in a comic will likely include some form of interaction with other characters. 
+      <h5> By hovering over a character’s bubble, you can see an indicator that shows their name, number of total interactions with other characters, and number of connections. Doing this also grays out the bubbles of other characters that the specified character is not connected to, highlighting who is within one degree of separation from them. By hovering over one character at a time, you can trace paths between any two characters within a couple degrees of separation.
+      <h5>You can also zoom in and out and drag character bubbles around to see how the whole network reacts in a magnetic manner, keeping social clusters connected. This was the most challenging feature to implement, but it allows you to visualize the social distance between a character and others, as they shift around.</h5>
+    </div>
+
+    <div class="w3-third w3-center">
+      <!--<i class="fa fa-anchor w3-padding-64 w3-text-red"></i>-->
+    </div>
+  </div>
+</div>
+
+<!-- Thanos 1 Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div>
+      <h1><centered>Thanos' First Snap</centered></h1>
+      <div class="chart">
+        <centered><NetworkGraph2 graph={netdata}/></centered>
+      </div>
+      <h5 class="w3-padding-32">In our graph, we represent each character as a bubble. The color is determined by the broad affiliation of the character (i.e., Avengers, X-Men, Fantastic Four, etc.) , and the size is determined by the number of connections the character has. A connection is a link between two characters who have interacted in the comics. Interestingly, by linking size to connection count, we find that size also roughly represents how often a character appears in comics, as any appearance in a comic will likely include some form of interaction with other characters. 
+      <h5> By hovering over a character’s bubble, you can see an indicator that shows their name, number of total interactions with other characters, and number of connections. Doing this also grays out the bubbles of other characters that the specified character is not connected to, highlighting who is within one degree of separation from them. By hovering over one character at a time, you can trace paths between any two characters within a couple degrees of separation.
+      <h5>You can also zoom in and out and drag character bubbles around to see how the whole network reacts in a magnetic manner, keeping social clusters connected. This was the most challenging feature to implement, but it allows you to visualize the social distance between a character and others, as they shift around.</h5>
+    </div>
+
+    <div class="w3-third w3-center">
+      <!--<i class="fa fa-anchor w3-padding-64 w3-text-red"></i>-->
+    </div>
+  </div>
+</div>
+
+<!-- Thanos 2 Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div>
+      <h1><centered>Thanos' Second Snap</centered></h1>
+      <div class="chart">
+        <centered><NetworkGraph3 graph={netdata}/></centered>
+      </div>
+      <h5 class="w3-padding-32">In our graph, we represent each character as a bubble. The color is determined by the broad affiliation of the character (i.e., Avengers, X-Men, Fantastic Four, etc.) , and the size is determined by the number of connections the character has. A connection is a link between two characters who have interacted in the comics. Interestingly, by linking size to connection count, we find that size also roughly represents how often a character appears in comics, as any appearance in a comic will likely include some form of interaction with other characters. 
+      <h5> By hovering over a character’s bubble, you can see an indicator that shows their name, number of total interactions with other characters, and number of connections. Doing this also grays out the bubbles of other characters that the specified character is not connected to, highlighting who is within one degree of separation from them. By hovering over one character at a time, you can trace paths between any two characters within a couple degrees of separation.
+      <h5>You can also zoom in and out and drag character bubbles around to see how the whole network reacts in a magnetic manner, keeping social clusters connected. This was the most challenging feature to implement, but it allows you to visualize the social distance between a character and others, as they shift around.</h5>
+    </div>
+
+    <div class="w3-third w3-center">
+      <!--<i class="fa fa-anchor w3-padding-64 w3-text-red"></i>-->
+    </div>
+  </div>
+</div>
+
+<!-- Thanos 3 Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div>
+      <h1><centered>Who's Left?</centered></h1>
+      <div class="chart">
+        <centered><NetworkGraph4 graph={netdata}/></centered>
+      </div>
+      <h5 class="w3-padding-32">In our graph, we represent each character as a bubble. The color is determined by the broad affiliation of the character (i.e., Avengers, X-Men, Fantastic Four, etc.) , and the size is determined by the number of connections the character has. A connection is a link between two characters who have interacted in the comics. Interestingly, by linking size to connection count, we find that size also roughly represents how often a character appears in comics, as any appearance in a comic will likely include some form of interaction with other characters. 
+      <h5> By hovering over a character’s bubble, you can see an indicator that shows their name, number of total interactions with other characters, and number of connections. Doing this also grays out the bubbles of other characters that the specified character is not connected to, highlighting who is within one degree of separation from them. By hovering over one character at a time, you can trace paths between any two characters within a couple degrees of separation.
+      <h5>You can also zoom in and out and drag character bubbles around to see how the whole network reacts in a magnetic manner, keeping social clusters connected. This was the most challenging feature to implement, but it allows you to visualize the social distance between a character and others, as they shift around.</h5>
+    </div>
+
+    <div class="w3-third w3-center">
+      <!--<i class="fa fa-anchor w3-padding-64 w3-text-red"></i>-->
+    </div>
+  </div>
+</div>
+
+<!-- The Network  Grid -->
 <div class="w3-row-padding w3-padding-64 w3-container">
   <div class="w3-content">
     <div>
