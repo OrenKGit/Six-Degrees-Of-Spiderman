@@ -10,9 +10,9 @@
   
   {#if center}
   <slot></slot><br/>
-  <img src="../scroll-down-{color}.svg" class="arrow" class:bounce={animation} alt="" aria-hidden="true"/>
+  <img src="/scroll-down-{color}.svg" class="arrow" class:bounce={animation} alt="" aria-hidden="true"/>
   {:else}
-  <img src="../scroll-down-{color}.svg" class="arrow left" class:bounce={animation} alt="" aria-hidden="true"/><slot></slot>
+  <img src="/scroll-down-{color}.svg" class="arrow left" class:bounce={animation} alt="" aria-hidden="true"/><slot></slot>
   {/if}
   
   <style>

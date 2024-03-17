@@ -7,6 +7,7 @@
     let nodes = graph.nodes;
     let links = graph.links;
     let selectedOrder = 'by group';
+    let svgNode;
     
 
     // add dropdown to change between orders 

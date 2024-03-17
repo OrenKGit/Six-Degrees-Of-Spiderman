@@ -49,8 +49,9 @@
     const xScale = d3.scaleLinear().domain([0, numClusters]).range([padding, width - padding]);
     const yScale = d3.scaleLinear().domain([0, numClusters]).range([padding, height - padding]);
 
+    const spacingFactor = 5; // Adjust this value to increase or decrease spacing
     const centers = Array.from({length: numClusters}, (_, i) => ({
-        x: (i + 1) * (width / (numClusters + 1)),
+        x: (i + 1) * (width / (numClusters + 1)) * spacingFactor,
         y: height / 2
     }));
     // add transition from random to grouped view
@@ -60,6 +61,7 @@
         svgGroup = d3.select(svg).append('g'); 
 
         d3.select(svg).call(zoom);
+        d3.select(svg).call(zoom.transform, d3.zoomIdentity.scale(0.35));
 
       const maxNodeSize = d3.max(nodes, d => d.size);
   
