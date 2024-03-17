@@ -49,6 +49,10 @@
     const xScale = d3.scaleLinear().domain([0, numClusters]).range([padding, width - padding]);
     const yScale = d3.scaleLinear().domain([0, numClusters]).range([padding, height - padding]);
 
+    const centers = Array.from({length: numClusters}, (_, i) => ({
+        x: (i + 1) * (width / (numClusters + 1)),
+        y: height / 2
+    }));
     // add transition from random to grouped view
     // add legend for group categories
     onMount(async () => {
@@ -60,12 +64,12 @@
       const maxNodeSize = d3.max(nodes, d => d.size);
   
       simulation = d3.forceSimulation(graph.nodes)
-            .velocityDecay(0.5)
-            .force('charge', d3.forceManyBody().strength(-200).distanceMin(1).distanceMax(50))
-            .force('center', d3.forceCenter(width / 2, height / 2))
-            .force('collide', d3.forceCollide().radius(d => Math.sqrt(d.size / maxNodeSize) * 100))
-            .force('x', d3.forceX(d => xScale(d.group)).strength(1)) 
-            .force('y', d3.forceY(d => yScale(d.group)).strength(1)) 
+        .velocityDecay(0.5)
+        .force('charge', d3.forceManyBody().strength(-200).distanceMin(100).distanceMax(200))
+        .force('center', d3.forceCenter(width / 2, height / 2))
+        .force('collide', d3.forceCollide().radius(d => Math.sqrt(d.size / maxNodeSize) * 100))
+        .force('x', d3.forceX(d => centers[d.group].x).strength(1)) 
+        .force('y', d3.forceY(d => centers[d.group].y).strength(1)) 
 
         const node = svgGroup
         .selectAll('circle')
