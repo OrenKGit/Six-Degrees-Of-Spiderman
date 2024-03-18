@@ -4,12 +4,8 @@
     export let graph;
   
     let svg;
-    let groupedView = false;
     let simulation;
-    let isLegendHidden = false;
-    let isNodesRandomized = false;
-    let legendGroup;
-    let node;
+    let isNodesRandomized = true;
     
 
 
@@ -70,17 +66,19 @@
         svgGroup = d3.select(svg).append('g'); 
 
         d3.select(svg).call(zoom);
-        d3.select(svg).call(zoom.transform, d3.zoomIdentity.translate(width / 3, height / 5).scale(0.4));
+        d3.select(svg).call(zoom.transform, d3.zoomIdentity.translate(width / 4, height / 5).scale(0.4));
 
       const maxNodeSize = d3.max(nodes, d => d.size);
   
       simulation = d3.forceSimulation(graph.nodes)
         .velocityDecay(0.5)
-        .force('charge', d3.forceManyBody().strength(-200).distanceMin(100).distanceMax(200))
+        .force('charge', d3.forceManyBody().strength(-100).distanceMin(100).distanceMax(200))
         .force('center', d3.forceCenter(width / 2, height / 2))
         .force('collide', d3.forceCollide().radius(d => Math.sqrt(d.size / maxNodeSize) * 100))
-        .force('x', d3.forceX(d => centers[d.group].x).strength(1)) 
-        .force('y', d3.forceY(d => centers[d.group].y).strength(1)) 
+        .force('x', d3.forceX(width / 2).strength(0.2)) 
+        .force('y', d3.forceY(height / 2).strength(0.2));
+        // .force('x', d3.forceX(d => centers[d.group].x).strength(1)) 
+        // .force('y', d3.forceY(d => centers[d.group].y).strength(1)) 
 
         const node = svgGroup
         .selectAll('circle')
@@ -89,6 +87,8 @@
         .append('circle')
         .attr('r', d =>  Math.sqrt(d.size / maxNodeSize) * 100)
         .style("fill", function(d) { return groupColour(this, d); })
+        .style("stroke", "white") 
+        .style("stroke-width", "1")
         .call(drag(simulation));
   
       node.append('title')
@@ -129,13 +129,13 @@
             .attr('transform', (d, i) => `translate(0,${i * 40})`);
 
         legend.append('rect')
-            .attr('x', width + 350)
+            .attr('x', width + 450)
             .attr('width', 50)
             .attr('height', 50)
             .style('fill', d => d);
 
         legend.append('text')
-            .attr('x', width + 344)
+            .attr('x', width + 444)
             .attr('y', 20)
             .attr('dy', '.35em')
             .style('text-anchor', 'end')
@@ -168,31 +168,31 @@
         .on('end', dragended);
     }
 
-    function toggleLegendAndNodes() {
-    if (!isLegendHidden) {
-      legendGroup.style('display', 'none');
-      isLegendHidden = true;
+    function toggle() {
+    if (isNodesRandomized) { 
+      // Regroup nodes into their clusters
+      simulation.force('x', d3.forceX(d => centers[d.group].x).strength(0.3));
+      simulation.force('y', d3.forceY(d => centers[d.group].y).strength(0.3));
+      simulation.alpha(1).restart();
+      simulation.force('x').initialize(graph.nodes);
+      simulation.force('y').initialize(graph.nodes);
+      isNodesRandomized = false;
     } else {
-      legendGroup.style('display', 'block');
-      isLegendHidden = false;
-    }
-
-    if (!isNodesRandomized) {
       // Randomize nodes into one cluster
       simulation.force('x', d3.forceX(width / 2).strength(0.2));
       simulation.force('y', d3.forceY(height / 2).strength(0.2));
       simulation.alpha(1).restart();
+      simulation.force('x').initialize(graph.nodes);
+      simulation.force('y').initialize(graph.nodes);
       isNodesRandomized = true;
-    } else {
-      // Regroup nodes into their clusters
-      simulation.force('x', d3.forceX(d => centers[d.group].x).strength(1));
-      simulation.force('y', d3.forceY(d => centers[d.group].y).strength(1));
-      simulation.alpha(1).restart();
-      isNodesRandomized = false;
     }
   }
 
     
   </script>
-<!-- <button on:click={toggleLegendAndNodes}>Toggle Legend and Nodes</button> -->
+
+<div class="checkbox-container">
+  <input type="checkbox" on:change={toggle}>
+  <span>Group</span>
+</div>
   <svg bind:this={svg} width="960" height="600"></svg>
