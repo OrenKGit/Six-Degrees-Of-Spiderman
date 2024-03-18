@@ -5,8 +5,10 @@
   import NetworkGraph2 from "./NetworkGraph2.svelte";
   import NetworkGraph3 from "./NetworkGraph3.svelte";
   import NetworkGraph4 from "./NetworkGraph4.svelte";
+  import NetworkGraph5 from "./NetworkGraph5.svelte";
   import NetworkGraphFiltered from './NetworkGraphFiltered.svelte';
   import BubbleGraph from "./BubbleGraph.svelte";
+  import Bubble1 from "./Bubble1.svelte";
   import ArcGraph from "./ArcGraph.svelte";
   import spiderdata from "./spiderman_network.json";
   import thordata from "./thor_network.json";
@@ -76,8 +78,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   </div>
 </div>
 
-
-
 <!-- Second Grid -->
 <div class="w3-row-padding w3-padding-64 w3-container">
   <div class="w3-content">
@@ -140,7 +140,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <div>
       <h1><centered>How They Connect</centered></h1>
       <div class="chart">
-        <centered><NetworkGraph1 graph={spiderthordata}/></centered>
+        <centered><NetworkGraph5 graph={spiderthordata}/></centered>
       </div>
       <h5 class="w3-padding-32">Quite easily, actually! Due to Thor and Spider-Man being teammates on the Avengers, the two groups share a fair amount of inter-group connections. Heimdall could simply pass it to Thor, who could pass it to Spider-Man, who could pass it to Daredevil, allowing Heimdall to get his sword signed by his favorite superhero! Despite being two very different people from two very different worlds, Hogun and Daredevil are only three degrees of separation apart!
         </div>

@@ -52,7 +52,7 @@
   let transform = d3.zoomIdentity;
   let simulation, context;
   let dpi = 1;
-  let initialZoomScale = 0.06;  //set initial zoom
+  let initialZoomScale = 0.085;  //set initial zoom
   onMount(() => {
     dpi = window.devicePixelRatio || 1;
     context = canvas.getContext("2d");
@@ -104,7 +104,7 @@
     let zoom = d3.zoom()
       .scaleExtent([0, 10])
       .on("zoom", zoomed);
-    let initialTranslate = [width / 2, height / 2];
+    let initialTranslate = [width / 2.5, height / 2.5];
     d3.select(canvas)
       .call(
         d3

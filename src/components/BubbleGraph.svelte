@@ -6,6 +6,11 @@
     let svg;
     let groupedView = false;
     let simulation;
+    let isLegendHidden = false;
+    let isNodesRandomized = false;
+    let legendGroup;
+    let node;
+    
 
 
     $: links = graph.links.map((d) => Object.create(d));
@@ -50,10 +55,14 @@
     const yScale = d3.scaleLinear().domain([0, numClusters]).range([padding, height - padding]);
 
     const spacingFactor = 5; // Adjust this value to increase or decrease spacing
-    const centers = Array.from({length: numClusters}, (_, i) => ({
-        x: (i + 1) * (width / (numClusters + 1)) * spacingFactor,
-        y: height / 2
-    }));
+    const centers = [
+    { x: width / 5, y: height / 7 }, // Top left
+    { x: 4 * width / 5, y: height / 7 }, // Top right
+    { x: width / 5, y: 2 * height / 2 }, // Middle left
+    { x: 4 * width / 5, y: 2* height / 2 }, // Middle right
+    { x: width / 5, y: 12 * height / 7 }, // Bottom left
+    { x: 4 * width / 5, y: 12 * height / 7 }, // Bottom right
+];
     // add transition from random to grouped view
     // add legend for group categories
     onMount(async () => {
@@ -61,7 +70,7 @@
         svgGroup = d3.select(svg).append('g'); 
 
         d3.select(svg).call(zoom);
-        d3.select(svg).call(zoom.transform, d3.zoomIdentity.scale(0.35));
+        d3.select(svg).call(zoom.transform, d3.zoomIdentity.translate(width / 3, height / 5).scale(0.4));
 
       const maxNodeSize = d3.max(nodes, d => d.size);
   
@@ -91,25 +100,46 @@
           .attr('cy', d => d.y);
       });
 
+    //   svgGroup.selectAll('.label')
+    // .data(groupNames)
+    // .enter()
+    // .append('rect')
+    // .attr('x', (d, i) => centers[i].x - 70) 
+    // .attr('y', (d, i) => centers[i].y - 50) 
+    // .attr('width', 140)
+    // .attr('height', 40) 
+    // .style('fill', 'white');
+
+// svgGroup.selectAll('.label')
+//     .data(groupNames)
+//     .enter()
+//     .append('text')
+//     .attr('class', 'label')
+//     .attr('x', (d, i) => centers[i].x)
+//     .attr('y', (d, i) => centers[i].y- 30) 
+//     .text(d => d)
+//     .style('text-anchor', 'middle')
+//     .style('font-size', '35px'); 
 
       const legend = svgGroup.selectAll('.legend')
             .data(radgrads)
             .enter()
             .append('g')
             .attr('class', 'legend')
-            .attr('transform', (d, i) => `translate(0,${i * 20})`);
+            .attr('transform', (d, i) => `translate(0,${i * 40})`);
 
         legend.append('rect')
-            .attr('x', width - 18)
-            .attr('width', 18)
-            .attr('height', 18)
+            .attr('x', width + 350)
+            .attr('width', 50)
+            .attr('height', 50)
             .style('fill', d => d);
 
         legend.append('text')
-            .attr('x', width - 24)
-            .attr('y', 9)
+            .attr('x', width + 344)
+            .attr('y', 20)
             .attr('dy', '.35em')
             .style('text-anchor', 'end')
+            .style('font-size', '35px') 
             .text((d, i) => groupNames[i]);
 
     });
@@ -138,7 +168,31 @@
         .on('end', dragended);
     }
 
+    function toggleLegendAndNodes() {
+    if (!isLegendHidden) {
+      legendGroup.style('display', 'none');
+      isLegendHidden = true;
+    } else {
+      legendGroup.style('display', 'block');
+      isLegendHidden = false;
+    }
+
+    if (!isNodesRandomized) {
+      // Randomize nodes into one cluster
+      simulation.force('x', d3.forceX(width / 2).strength(0.2));
+      simulation.force('y', d3.forceY(height / 2).strength(0.2));
+      simulation.alpha(1).restart();
+      isNodesRandomized = true;
+    } else {
+      // Regroup nodes into their clusters
+      simulation.force('x', d3.forceX(d => centers[d.group].x).strength(1));
+      simulation.force('y', d3.forceY(d => centers[d.group].y).strength(1));
+      simulation.alpha(1).restart();
+      isNodesRandomized = false;
+    }
+  }
+
     
   </script>
-
+<!-- <button on:click={toggleLegendAndNodes}>Toggle Legend and Nodes</button> -->
   <svg bind:this={svg} width="960" height="600"></svg>
