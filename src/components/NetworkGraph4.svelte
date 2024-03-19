@@ -251,7 +251,7 @@
     const node = simulation.find(
       transform.invertX(currentEvent.x * dpi),
       transform.invertY(currentEvent.y * dpi),
-      200
+      900
     );
     if (node) {
       node.x = transform.applyX(node.x);

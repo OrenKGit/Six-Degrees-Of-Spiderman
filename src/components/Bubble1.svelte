@@ -65,7 +65,7 @@
     svgGroup = d3.select(svg).append('g');
 
     d3.select(svg).call(zoom);
-    d3.select(svg).call(zoom.transform, d3.zoomIdentity.translate(width / 6, height / 4).scale(0.4));
+    d3.select(svg).call(zoom.transform, d3.zoomIdentity.translate(width / 3, height / 4).scale(0.4));
 
     const maxNodeSize = d3.max(nodes, (d) => d.size);
 

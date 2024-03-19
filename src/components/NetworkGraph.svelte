@@ -140,17 +140,18 @@ function simulationUpdate() {
     context.translate(transform.x, transform.y);
     context.scale(transform.k, transform.k);
     activeLinks = [];
+
+    if (activeNode) {
+        activeLinks = links.filter(link => link.source.id === activeNode.id || link.target.id === activeNode.id);
+    }
+
     links.forEach((d) => {
-      if (activeNode && (d.source.id === activeNode.id || d.target.id === activeNode.id)) {
-          activeLinks.push(d);
-      }
-      
       context.beginPath();
       context.moveTo(d.source.x, d.source.y);
       context.lineTo(d.target.x, d.target.y);
-      context.globalAlpha = activeNode && (d.source.id === activeNode.id || d.target.id === activeNode.id) ? 1 : 0.3;
+      context.globalAlpha = activeLinks.some(link => link === d) ? 1 : 0.3;
       context.strokeStyle = "#999";
-      context.lineWidth = Math.cbrt(d.value) / (activeNode && (d.source.id === activeNode.id || d.target.id === activeNode.id) ? 0.25 : 1);
+      context.lineWidth = Math.cbrt(d.value) / (activeLinks.some(link => link === d) ? 0.25 : 1);
       context.stroke();
       context.globalAlpha = 0.9;
     });
@@ -173,7 +174,7 @@ function simulationUpdate() {
           context.lineWidth = 1.5;
           context.stroke();
           context.fillStyle = "#555"; // change to groupColour(context, d) for color instead
-          context.globalAlpha = 0.6; // Adjust transparency here
+          context.globalAlpha = 0.7; // Adjust transparency here
           context.fill();
           context.globalAlpha = 0.9;
         }
@@ -260,20 +261,23 @@ function simulationUpdate() {
 
   // function for search box, stops working after a while?
   function updateSearch(event) {
-    const query = event.target.value.trim().toLowerCase();
-    const matchedNodes = nodes.filter(node => node.name.toLowerCase().includes(query));
+  const query = event.target.value.trim().toLowerCase();
+  const matchedNodes = nodes.filter(node => node.name.toLowerCase().includes(query));
 
-    if (matchedNodes.length > 0) {
-      // Find the node with the largest size among duplicates
-      activeNode = matchedNodes.reduce((maxNode, node) => {
-        return maxNode.size > node.size ? maxNode : node;
-      });
-    } else if (query === '') {
-      activeNode = false; 
-    }
-    // activeLinks = [];
-
+  if (matchedNodes.length > 0) {
+    // Find the node with the largest size among duplicates
+    activeNode = matchedNodes.reduce((maxNode, node) => {
+      return maxNode.size > node.size ? maxNode : node;
+    });
+    // Update activeLinks
+    activeLinks = links.filter(link => link.source.id === activeNode.id || link.target.id === activeNode.id);
+  } else if (query === '') {
+    activeNode = false; 
+    activeLinks = [];
   }
+
+  simulationUpdate();
+}
   
 
 </script>
