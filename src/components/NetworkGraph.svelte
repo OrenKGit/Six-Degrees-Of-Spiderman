@@ -42,6 +42,7 @@
     }
     return Object.create(d);
   });
+  
 
   function groupColour(context, d) {
     let nodesize = 2 + Math.sqrt(d.size) / 1;
@@ -53,6 +54,10 @@
   let simulation, context;
   let dpi = 1;
   let initialZoomScale = 0.06; 
+  let searchQuery = '';
+  let activeLinks = []; 
+
+  $: filteredNodes = nodes.filter(node => node.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
   onMount(() => {
     dpi = window.devicePixelRatio || 1;
@@ -129,52 +134,37 @@
   simulationUpdate();
 }
 
-  function simulationUpdate() {
+function simulationUpdate() {
     context.save();
     context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     context.translate(transform.x, transform.y);
     context.scale(transform.k, transform.k);
-    let activeLinks = []
+    activeLinks = [];
     links.forEach((d) => {
-      if (d.source.id === activeNode.id) {
-          activeLinks.push(d.target.id);
-      }
-      if (d.target.id === activeNode.id) {
-          activeLinks.push(d.source.id);
-      }
-      if ((d.source.id === activeNode.id) || (d.target.id === activeNode.id)) {
-          context.beginPath();
-          context.moveTo(d.source.x, d.source.y);
-          context.lineTo(d.target.x, d.target.y);
-          context.globalAlpha = 1;
-          context.strokeStyle = "#999";
-          context.lineWidth = Math.cbrt(d.value) / 0.25;
-          context.stroke();
-          context.globalAlpha = 0.9;
-        }
-      else {
-          context.beginPath();
-          context.moveTo(d.source.x, d.source.y);
-          context.lineTo(d.target.x, d.target.y);
-          context.globalAlpha = 0.3;
-          context.strokeStyle = "#999";
-          context.lineWidth = Math.cbrt(d.value) / 1;
-          context.stroke();
-          context.globalAlpha = 0.9;
+      if (activeNode && (d.source.id === activeNode.id || d.target.id === activeNode.id)) {
+          activeLinks.push(d);
       }
       
+      context.beginPath();
+      context.moveTo(d.source.x, d.source.y);
+      context.lineTo(d.target.x, d.target.y);
+      context.globalAlpha = activeNode && (d.source.id === activeNode.id || d.target.id === activeNode.id) ? 1 : 0.3;
+      context.strokeStyle = "#999";
+      context.lineWidth = Math.cbrt(d.value) / (activeNode && (d.source.id === activeNode.id || d.target.id === activeNode.id) ? 0.25 : 1);
+      context.stroke();
+      context.globalAlpha = 0.9;
     });
 
     nodes.forEach((d, i) => {
       if (activeNode !== false) {
-        if (activeLinks.includes(d.id) || d.id === activeNode.id) {
-        context.beginPath();
-        context.arc(d.x, d.y, 2 + Math.sqrt(d.size) / 5, 0, 2 * Math.PI);
-        context.strokeStyle = "solid";
-        context.lineWidth = 1.5;
-        context.stroke();
-        context.fillStyle = groupColour(context, d);
-        context.fill();
+        if (activeNode && (d.id === activeNode.id || activeLinks.some(link => link.source.id === d.id || link.target.id === d.id))) {
+          context.beginPath();
+          context.arc(d.x, d.y, 2 + Math.sqrt(d.size) / 5, 0, 2 * Math.PI);
+          context.strokeStyle = "solid";
+          context.lineWidth = 1.5;
+          context.stroke();
+          context.fillStyle = groupColour(context, d);
+          context.fill();
         }
         else {
           context.beginPath();
@@ -182,8 +172,10 @@
           context.strokeStyle = "solid";
           context.lineWidth = 1.5;
           context.stroke();
-          context.fillStyle = "#555"///groupColour(context, d);
+          context.fillStyle = "#555"; // change to groupColour(context, d) for color instead
+          context.globalAlpha = 0.6; // Adjust transparency here
           context.fill();
+          context.globalAlpha = 0.9;
         }
       }
       else {
@@ -195,7 +187,6 @@
         context.fillStyle = groupColour(context, d);
         context.fill();
       }
-      
       
       context.font = 'lighter 100px sans-serif';
       if (d.size > 5000000) {
@@ -205,10 +196,8 @@
           .forEach((word, index) =>
             context.fillText(d.name, d.x - (d.name.length * 25), d.y)
           );
-        
       }
       else {
-        //context.font = d.size/(d.size/10) + 'px sans-serif'
         context.font = 'lighter 20px sans-serif';
         context.fillStyle = "black";
         d.name
@@ -219,7 +208,8 @@
       }
     });
     context.restore();
-  }
+}
+
 
   // Use the d3-force simulation to locate the node
   
@@ -268,6 +258,22 @@
     height = node.offsetHeight * dpi;
   }
 
+  // function for search box, stops working after a while?
+  function updateSearch(event) {
+    const query = event.target.value.trim().toLowerCase();
+    const matchedNodes = nodes.filter(node => node.name.toLowerCase().includes(query));
+
+    if (matchedNodes.length > 0) {
+      // Find the node with the largest size among duplicates
+      activeNode = matchedNodes.reduce((maxNode, node) => {
+        return maxNode.size > node.size ? maxNode : node;
+      });
+    } else if (query === '') {
+      activeNode = false; 
+    }
+    // activeLinks = [];
+
+  }
   
 
 </script>
@@ -275,6 +281,7 @@
 <svelte:window on:resize={resize} />
 
 <div on:resize={resize} class="container">
+  <input type="text" placeholder="Type to search..." on:input={updateSearch} class="search-box" />
   {#if activeNode}
     <breadcrumb id="nodeDetails">
       <strong><b>{activeNode.name}</b></strong>
@@ -314,5 +321,15 @@
     left: 1%;
     width: unset;
 		color:#000000;
+  }
+  .search-box {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 200px; /* Adjust width as needed */
+    height: 30px; /* Adjust height as needed */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
   }
 </style>

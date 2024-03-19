@@ -13,6 +13,8 @@
   import spiderdata from "./spiderman_network.json";
   import thordata from "./thor_network.json";
   import spiderthordata from "./FILTERED_NODES_LINKS.json";
+  import spiderman from "./spiderman.png";
+  
 
   import { onMount } from "svelte";
   import Scroller from "./Scroller.svelte";
@@ -64,9 +66,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
   <div class="w3-content">
     <div class="w3-third w3-center">
-      <!--<i class="fa fa-coffee w3-padding-64 w3-text-red w3-margin-right"></i>-->
-      <!--https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/1280px-Marvel_Logo.svg.png-->
-      <!--<img class="w3-padding-64 w3-text-red w3-margin-right" src={spiderman} width=400 height=500>-->
+      <!-- <i class="fa fa-coffee w3-padding-64 w3-text-red w3-margin-right"></i> -->
+      <!-- https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Marvel_Logo.svg/1280px-Marvel_Logo.svg.png -->
+      <img class="w3-padding-64 w3-text-red w3-margin-right" src={spiderman} alt="Spiderman" width=400 height=500 style="margin-left: -100px;">
     </div>
 
     <div class="w3-twothird">
