@@ -82,13 +82,31 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <div class="w3-row-padding w3-padding-64 w3-container">
   <div class="w3-content">
     <div>
-      <h1><centered>The Clusters</centered></h1>
+      <h1><centered>The Marvel Heroes</centered></h1>
       <div class="chart">
         <centered><BubbleGraph graph={netdata}/></centered>
         
       </div>
-      <h5 class="w3-padding-32">To illustrate this concept, we considered using social network data. However, this produced ethical concerns, as it is very difficult to gather this kind of data both comprehensively and with respect for people’s privacy. Therefore, we used the Marvel Comics Universe, which consists of the stories of thousands and thousands of different characters, who often interact with each other in crossovers and collaborations. The comics therefore present us with a full picture of each of these characters’ social networks, which are best represented by a network graph. 
-      <h5>By using a network graph to show the relationships between characters, as well as the strength of the relationship, we can highlight the clusters of characters that have formed. It also allows us to identify how unlikely chains can exist. By following the path between nodes, you can see the connections that link together unlikely character-pairs. For example, Harry Osborn is Spiderman’s friend, and Spiderman knows Wasp, who knows Cyclops. 
+      <h5 class="w3-padding-32">To illustrate this concept, we considered using social network data. However, this produced ethical concerns, as it is very difficult to gather this kind of data both comprehensively and with respect for people’s privacy. Therefore, we used the Marvel Comics Universe, which consists of the stories of thousands and thousands of different characters, who often interact with each other in crossovers and collaborations. The comics therefore present us with a full picture of each of these characters’ relationships, which can be explored to see how real life social networks are also manifested in an artificial universe as well. Investigating how the connections between characters in the Marvel universe is not random, but rather, mimics real networks provides more insight into the principles that define these real life networks. 
+      <h5>Due to the large magnitude of our dataset, we chose to examine only the top 100 characters in the Marvel Universe based on their number of links. We consider two Marvel characters to be linked if they jointly appear in the same Marvel comic book. The size of the bubbles are scaled based on the number of links characters have. Thus the bigger the bubble is, the more interactions the character has with other heroes from the book. The characters are also grouped based on their affiliations in the Marvel Universe. By clustering the bubbles into their groups, we can see Avengers and X-men are the biggest group with characters that have a high number of connections with other characters. (Note: some characters appear more than once in the network because certain characters in the Marvel Universe have multiple versions across various storylines, timelines, or alternate realities). 
+    </div>
+
+    <div class="w3-third w3-center">
+      <!--<i class="fa fa-anchor w3-padding-64 w3-text-red"></i>-->
+    </div>
+  </div>
+</div>
+
+<!-- Third Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <div>
+      <h1><centered>Introducing Spiderman</centered></h1>
+      <div class="chart">
+        <centered><Bubble1 graph={netdata}/></centered>
+        
+      </div>
+      <h5 class="w3-padding-32"> To illustrate the interconnectedness of the Marvel network, we will show how Spiderman and other characters from the Spiderman story (spider group) can be actually be connected to a random character from a seemingly unrelated Marvel universe. 
     </div>
 
     <div class="w3-third w3-center">
@@ -106,7 +124,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <centered><NetworkGraph1 graph={spiderdata}/></centered>
       </div>
       <br><br>
-      <h5 class="w3-padding-32">This is Spider-Man, his family, his friends, and his enemies. They live in New York and, for the most part, consist of regular human beings (don't worry about the second Spider-Man, that's a clone running around).
+      <h5 class="w3-padding-32"> This is Spider-Man, his family, his friends, and his enemies. They live in New York and, for the most part, consist of regular human beings (don't worry about the second Spider-Man, that's a clone running around from a different dimension). Unsurprisingly, everyone in the Spider group is connected to each other because they all exist in the same story and interact with each other. 
+      <h5> Connections refer to the number of direct, immediate links the character has with other characters within the graph, which is highlighted above. In other words, it represents the first degree of separation. Interactions extends beyond immediate connections to include all relationships, both direct and indirect, that a character has within the network. Interactions take into account not only the first degree connections but also any secondary or tertiary connections that stem from the initial links, encompassing all degrees of separation.
       </div>
 
     <div class="w3-third w3-center">
@@ -124,8 +143,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <centered><NetworkGraph1 graph={thordata}/></centered>
       </div>
       
-      <h5 class="w3-padding-32"> This is Thor, his family, his friends, and his enemies. They live on Asgard, the mythical home of the Norse Gods and, for the most part, consist of the aforementioned Norse Gods.
-      <h5>That being the case, if Hogun, an Asgardian, wanted to get his favorite sword signed by Daredevil, a human man, how would he pass it along to make that happen?</h5>
+      <h5 class="w3-padding-32"> This is Thor, his family, his friends, and his enemies. They live on Asgard, the mythical home of the Norse Gods and, for the most part, consist of the aforementioned Norse Gods. Similarly, all the Asgardians are linked to each other in the graph because they all live in the same world. 
+      <h5>That being the case, how is Thor and his group connected to people outside of Asgard? If Hogun, an Asgardian, wanted to get his favorite sword signed by Daredevil, a human man, how would he pass it along to make that happen?</h5>
       </div>
 
     <div class="w3-third w3-center">
@@ -161,7 +180,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       </div>
       <h5 class="w3-padding-32">Now let's take a look at another example. Thanos has gotten his hands on the Infinity gauntlet, along with all of the Infinity Stones, giving him god-like powers!
       <h5>Usually, he would wipe out half of all life in the universe to deal with overpopulation. But since he's feeling nice today, he's only going to erase everyone within three degrees of separation from himself. That won't be too bad, right?
-      <h5>To do so, he decides that with each snap, he'll erase one degree of separation from himself. Snap! A dozen people turn to dust.</h5>
+      <h5>To do so, he decides that with each snap, he'll erase one degree of separation from himself. Snap! A dozen people turn to dust. The colored bubbles represent the remaining people who are alive. </h5>
     </div>
 
     <div class="w3-third w3-center">
@@ -178,8 +197,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
       <div class="chart">
         <centered><NetworkGraph3 graph={netdata}/></centered>
       </div>
-      <h5 class="w3-padding-32"> Snap! Uh-oh! That wiped out a lot more people than Thanos thought it would!
-      <h5> Now he feels bad, so he decides to stop there.</h5>
+      <h5 class="w3-padding-32"> Snap! Uh-oh! That wiped out a lot more people than Thanos thought it would! All the people who are first degree and second degrees of sepeartion from Thanos are gone, as shown by the greyed out bubbles in the graph. 
+      <h5> Now Thanos feels bad, so he decides to stop there.</h5>
     </div>
 
     <div class="w3-third w3-center">
@@ -197,6 +216,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <centered><NetworkGraph4 graph={netdata}/></centered>
       </div>
       <h5 class="w3-padding-32">How are there so few people left? While the first snap only erased a small group of people, those people knew a LOT of people. Each one knew at least twenty others, and though there was some overlap, that meant more than a hundred people got erased!
+      <h5> The fact that Thanos’s actions of erasing individuals within two degrees of separation from himself with each snap resulted in the disappearance of dozens of individuals emphasizes the impact of interconnectedness. Despite Thanos’s being a small character with few direct connections and a limited scope of erasure from the beginning, the repercussions of his final snap is significant, underscoring how connections between individuals amplify the effect of such actions. 
     </div>
 
     <div class="w3-third w3-center">
@@ -230,7 +250,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <centered><NetworkGraph graph={netdata}/></centered>
         
       </div>
-      <h5 class="w3-padding-32">While our data does not include every single person in the Marvel comics universe, you can still simulate Milgram's experiment with our network graph! You'll find that randomly picking any character will lead you back to Spider-Man in just a couple connections.
+      <h5 class="w3-padding-32">While our data does not include every single person in the Marvel comics universe, you can still simulate Milgram's experiment with our network graph! By using a network graph to show the relationships between characters, as well as the strength of the relationship, we can highlight the clusters of characters that have formed. It also allows us to identify how unlikely chains can exist. By following the path between nodes, you can see the connections that link together unlikely character-pairs. For example, Harry Osborn is Spiderman’s friend, and Spiderman knows Wasp, who knows Cyclops. You'll find that randomly picking any character will lead you back to Spider-Man in just a couple connections.
       <h5> If you'd like a demo explaining how we developed this network graph and how to use it, check out our demo below.</h5>
       <a href=https://youtu.be/P54tt7OG2Q0>Demo</a>
 
@@ -249,7 +269,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <centered><ArcGraph graph={netdata}/></centered>
         
       </div>
-      <h5 class="w3-padding-32">We also have this arc diagram to show you how everyone in the dataset knows each other.
+      <h5 class="w3-padding-32">We also have this arc diagram to show you how everyone in the dataset knows each other. The nodes can be ordered by their group, degree (number of links), and alphabetically by name to visualize different patterns of connections. 
     </div>
 
     <div class="w3-third w3-center">

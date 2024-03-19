@@ -6,11 +6,17 @@
     let svgContainer;
     let nodes = graph.nodes;
     let links = graph.links;
-    let selectedOrder = 'by group';
+    let selectedOrder = "by group";
     let svgNode;
+    let y;
+    let orders;
+    let label;
+    let marginLeft;
+    let path;
+    let arc;
+    let Y;
     
 
-    // add dropdown to change between orders 
     function order(nodes, links) {
     const degree = d3.rollup(
       links.flatMap(({ source, target, value }) => [
@@ -21,7 +27,7 @@
       ({ node }) => node
     );
     const orders = new Map([
-      ["by name", d3.sort(nodes.map((d) => d.id))],
+      ["by name", d3.sort(nodes, (a, b) => a.name.localeCompare(b.name)).map((d) => d.id)],
       ["by group", d3.sort(nodes, ({group}) => group, ({id}) => id).map(({id}) => id)],
       ["by degree", d3.sort(nodes, ({id}) => degree.get(id), ({id}) => id).map(({id}) => id).reverse()]
     ]);
@@ -30,20 +36,22 @@
       get: (key) => orders.get(key)
     };
   }
+
+  
+    
     
     onMount(async () => {
-
-    const width = 800;
-    const step = 3.6; // add a tooltip instead of overlapping text
+    
+    const width = 1000;
+    const step = 8; // overlapping text, add diff tooltip instead?
     const marginTop = 20;
     const marginRight = 20;
     const marginBottom = 20;
-    const marginLeft = 130;
+    marginLeft = 130;
     const height = (nodes.length - 1) * step + marginTop + marginBottom;
-    let orders = order(nodes, links);
-    const y = d3.scalePoint(orders.get("by group"), [marginTop, height - marginBottom]);
-    // shift to horizontal instead?   
-
+    orders = order(nodes, links);
+    y = d3.scalePoint(orders.get(selectedOrder), [marginTop, height - marginBottom]);
+    
     const color = d3.scaleOrdinal()
         .domain(nodes.map(d => d.group).sort(d3.ascending))
         .range(["#9b5fe0", "#16a4d8", "#60dbe8", "#8bd346", "#efdf48", "#f9a52c", "#d64e12"])
@@ -51,8 +59,7 @@
 
     const groups = new Map(nodes.map(d => [d.id, d.group]));
 
-    // A function of a link, that checks that source and target have the same group and returns
-    // the group; otherwise null. Used to color the links.
+
     function samegroup({ source, target }) {
         return groups.get(source) === groups.get(target) ? groups.get(source) : null;
     }
@@ -63,17 +70,18 @@
         .attr("viewBox", [0, 0, width, height])
         .attr("style", "max-width: 100%; height: auto;");
 
-    // The current position, indexed by id. Will be interpolated.
-    const Y = new Map(nodes.map(({id}) => [id, y(id)]));
+
+    Y = new Map(nodes.map(({id}) => [id, y(id)]));
     
     // Add an arc for each link.
-    function arc(d) {
+    arc = function(d) {
         const y1 = Y.get(d.source);
         const y2 = Y.get(d.target);
         const r = Math.abs(y2 - y1) / 2;
         return `M${marginLeft},${y1}A${r},${r} 0,0,${y1 < y2 ? 1 : 0} ${marginLeft},${y2}`;
     }
-    const path = svg.insert("g", "*")
+
+    path = svg.insert("g", "*")
         .attr("fill", "none")
         .attr("stroke-opacity", 0.6)
         .attr("stroke-width", 1.5)
@@ -84,7 +92,7 @@
         .attr("d", arc);
 
 
-    const label = svg.append("g")
+    label = svg.append("g")
         .attr("font-family", "sans-serif")
         .attr("font-size", 10)
         .attr("text-anchor", "end")
@@ -141,33 +149,43 @@
     `);
 
     svgNode = svg.node();
+    
 
     });
 
-    // A function that updates the positions of the labels and recomputes the arcs
-    // when passed a new order.
-    function update(order) {
-        y.domain(order);
 
-        label
-            .sort((a, b) => d3.ascending(Y.get(a.id), Y.get(b.id)))
-            .transition()
-            .duration(750)
-            .delay((d, i) => i * 20) 
-            .attrTween("transform", d => {
-            const i = d3.interpolateNumber(Y.get(d.id), y(d.id));
-            return t => {
-                const y = i(t);
-                Y.set(d.id, y);
-                return `translate(${marginLeft},${y})`;
-            }
-            });
+    function update() {
+        y.domain(orders.get(selectedOrder));
+        Y = new Map(nodes.map(({id}) => [id, y(id)]));
+
+        arc = function(d) {
+            const y1 = Y.get(d.source);
+            const y2 = Y.get(d.target);
+            const r = Math.abs(y2 - y1) / 2;
+            return `M${marginLeft},${y1}A${r},${r} 0,0,${y1 < y2 ? 1 : 0} ${marginLeft},${y2}`;
+        }
+
+        // make transition smoother
+        label.transition().duration(50)
+                .attr("transform", d => `translate(${marginLeft},${y(d.id)})`);
 
         path.transition()
-            .duration(750 + nodes.length * 20) 
-            .attrTween("d", d => () => arc(d));
+        .duration((750 + nodes.length * 20)) 
+        .attrTween("d", d => () => arc(d));
+    }
+
+    function onOrderChange() {
+        console.log(selectedOrder)
+        update();
     }
 
   </script>
+<label>Order
+    <select bind:value={selectedOrder} on:change={onOrderChange}>
+        <option value="by name">by name</option>
+        <option value="by group">by group</option>
+        <option value="by degree">by degree</option>
+    </select>
+</label>
   
 <div id="my_dataviz" bind:this={svgContainer}></div>

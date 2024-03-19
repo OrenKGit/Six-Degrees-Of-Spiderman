@@ -52,7 +52,7 @@
   let transform = d3.zoomIdentity;
   let simulation, context;
   let dpi = 1;
-  let initialZoomScale = 0.085; 
+  let initialZoomScale = 0.06; 
 
   onMount(() => {
     dpi = window.devicePixelRatio || 1;

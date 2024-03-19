@@ -88,11 +88,24 @@
         .attr('r', d =>  Math.sqrt(d.size / maxNodeSize) * 100)
         .style("fill", function(d) { return groupColour(this, d); })
         .style("stroke", "white") 
-        .style("stroke-width", "1")
+        .style("stroke-width", "2")
         .call(drag(simulation));
   
-      node.append('title')
-        .text(d => d.name);
+      // node.append('title')
+      //   .text(d => d.name);
+
+    node
+    .on('mouseover', function(event, d) {
+        d3.select('#tooltip')
+            .style('left', (event.pageX + 10) + 'px')
+            .style('top', (event.pageY - 10) + 'px')
+            .style('visibility', 'visible')
+            .text(d.name);
+    })
+    .on('mouseout', function() {
+        d3.select('#tooltip')
+            .style('visibility', 'hidden');
+    });
   
       simulation.on('tick', () => {
         node
@@ -126,7 +139,7 @@
             .enter()
             .append('g')
             .attr('class', 'legend')
-            .attr('transform', (d, i) => `translate(0,${i * 40})`);
+            .attr('transform', (d, i) => `translate(0,${i * 70})`);
 
         legend.append('rect')
             .attr('x', width + 450)
@@ -190,6 +203,19 @@
 
     
   </script>
+
+  <style>
+    #tooltip {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    padding: 3px;
+    font-size: 11px;
+    font-family: sans-serif;
+}
+  </style>
+
+<div id="tooltip" style="position: absolute; visibility: hidden;"></div>
 
 <div class="checkbox-container">
   <input type="checkbox" on:change={toggle}>
