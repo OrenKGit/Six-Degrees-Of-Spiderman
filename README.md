@@ -1,6 +1,7 @@
 # Six Degrees of Spiderman
 
-A Marvel Comics Network Graph
+**[A Marvel Comics Network Graph](https://orenkgit.github.io/Six-Degrees-Of-Spiderman/)**
+
 
 ## Introduction
 
